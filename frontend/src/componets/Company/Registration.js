@@ -89,7 +89,7 @@ export default function Registration({sendData}) {
             .then((data) => {
                 setUrl(data.url);
                 
-                axios.post("http://localhost:3000/Company_register", {
+                axios.post("https://backend-testing-1rgv.onrender.com/Company_register", {
                     Company_name: company,
                     Address: address,
                     Certificate: data.url, 

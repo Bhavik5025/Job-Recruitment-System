@@ -12,7 +12,7 @@ export default function ResumeTemplete(props)
     
   const [imageLoaded, setImageLoaded] = useState(false);
     useEffect(()=>{
-        axios.post("http://localhost:3000/get_resume_data",{email:props.user.Email}).then((data)=>{
+        axios.post("https://backend-testing-1rgv.onrender.com/get_resume_data",{email:props.user.Email}).then((data)=>{
             setData(data.data.data)
             if(data)
             {
@@ -30,12 +30,7 @@ export default function ResumeTemplete(props)
     setImageLoaded(true);
   }
 
-    // function download()
-    // {
-        
-    //     window.print(document.getElementById("di"))
-        
-    // }
+  
   
     
       function generatePDF() {

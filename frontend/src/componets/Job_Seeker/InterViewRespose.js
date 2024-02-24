@@ -5,7 +5,7 @@ export default function InterviewResponse()
 {
     var [rdata,setRdata]=useState([]);
     useEffect(()=>{
-        axios.post("http://localhost:3000/vacancy_Request_details_For_Jobber",{
+        axios.post("https://backend-testing-1rgv.onrender.com/vacancy_Request_details_For_Jobber",{
             email:window.localStorage.getItem("email"),
             Approve:"true"
         }).then((data)=>{

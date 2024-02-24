@@ -63,7 +63,7 @@ export default function ResumeBuilder(props) {
     e.preventDefault();
     // Send resumeData to your server or perform any desired actions
     console.log(objective+" "+skills+" "+college+" "+cpi+" "+title+" "+description+" "+graduation+" "+sdate+" "+edate+" "+hobbies+" "+location)
-    axios.post("http://localhost:3000/resume_details",{
+    axios.post("https://backend-testing-1rgv.onrender.com/resume_details",{
       email:props.user.Email,
       objective:objective,
     mobile:props.user.mobile,

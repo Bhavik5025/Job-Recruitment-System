@@ -22,7 +22,7 @@ export default function Company_profile({visible}) {
         marginLeft: "19px"
     }
     useEffect(() => {
-        axios.post("http://localhost:3000/company_details", {
+        axios.post("https://backend-testing-1rgv.onrender.com/company_details", {
             email: em
         })
             .then((response) => {
@@ -105,7 +105,7 @@ export default function Company_profile({visible}) {
           }
       
           // Make a POST request to your local server
-          const response = await axios.post("http://localhost:3000/company_dashboard", {
+          const response = await axios.post("https://backend-testing-1rgv.onrender.com/company_dashboard", {
             email: em,
             logo: logourl,
             images: imagesUrls,

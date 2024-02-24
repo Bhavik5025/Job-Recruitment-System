@@ -13,7 +13,7 @@ export default function Job_Seeker_SideBar()
     var [user,setUser]=useState({});
     const email=window.localStorage.getItem("email");
     useEffect(()=>{
-        axios.get(`http://localhost:3000/jobber_details?email=${email}`,).then((data)=>{
+        axios.get(`https://backend-testing-1rgv.onrender.com/jobber_details?email=${email}`,).then((data)=>{
             setUser(data.data);
             console.log(data.data)
             console.log(user);

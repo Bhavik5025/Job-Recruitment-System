@@ -3,15 +3,15 @@ import axios from "axios";
 
 export default function Job_Seeker_Registration({sendData})
 {
-    var [name,setName]=useState('abc');
+    var [name,setName]=useState('');
     var [email, setEmail] = useState('');
-    var [address, setAddress] = useState('112');
-    var [mobile, setMobile] = useState('9723362082');
-    var [password, setPassword] = useState('123456');
+    var [address, setAddress] = useState('');
+    var [mobile, setMobile] = useState('');
+    var [password, setPassword] = useState('');
     var [loading,setLoading]=useState(false);
-    var [confirmpassword, setConfirmPassword] = useState('123456');
+    var [confirmpassword, setConfirmPassword] = useState('');
     var [resume,setResume]=useState(null);
-    var [experience,setExperience]=useState('1');
+    var [experience,setExperience]=useState('');
     const [selectedOption, setSelectedOption] = useState('not selected');
     var [url,setUrl]=useState(false);
     var [image,setImage]=useState();
@@ -163,7 +163,7 @@ function btnclick(event) {
 }
 
 function saveUserData(data) {
-    axios.post("http://localhost:3000/job_seeker_data", {
+    axios.post("https://backend-testing-1rgv.onrender.com/job_seeker_data", {
         name: name,
         experience: experience,
         email: email,

@@ -9,7 +9,7 @@ export default function InterviewList()
     var [update,setUpdate]=useState(false);
     var [j_data,setJdata]=useState([]);
       useEffect(()=>{
-          axios.post("http://localhost:3000/vacancy_Request_details",{
+          axios.post("https://backend-testing-1rgv.onrender.com/vacancy_Request_details",{
               email:window.localStorage.getItem("email"),Approve:"true"
           }).then((data)=>{
               console.log(data.data)

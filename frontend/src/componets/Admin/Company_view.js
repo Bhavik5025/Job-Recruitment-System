@@ -26,7 +26,7 @@ export default function Company_view(props)
    setTime(e.target.value);
   }
     useEffect(()=>{
-      axios.post("http://localhost:3000/company_dashboard_data", {
+      axios.post("https://backend-testing-1rgv.onrender.com/company_dashboard_data", {
         email: props.email
     }).then((obj) => {
         console.log(obj);
@@ -41,7 +41,7 @@ export default function Company_view(props)
         console.log(error);
     });
     
-    axios.post("http://localhost:3000/visit_request_data",{
+    axios.post("https://backend-testing-1rgv.onrender.com/visit_request_data",{
       c_email:props.email,
       j_email:window.localStorage.getItem("email"),
       Approve:"false",
@@ -60,7 +60,7 @@ export default function Company_view(props)
     {
       setLoading(true);
       console.log(props.email);
-        axios.put("http://localhost:3000/approve",{
+        axios.put("https://backend-testing-1rgv.onrender.com/approve",{
           Email:props.email
         }).then((data)=>{
           alert("Company Approve SuccessFully");
@@ -74,7 +74,7 @@ export default function Company_view(props)
     function Reject()
     {
       setLoading1(true)
-      axios.delete("http://localhost:3000/remove",{
+      axios.delete("https://backend-testing-1rgv.onrender.com/remove",{
         data: {
           Email: props.email
         }
@@ -90,7 +90,7 @@ export default function Company_view(props)
     function ApplyforVisitRequest(event)
     {
       event.preventDefault();
-      axios.post("http://localhost:3000/visit_request",{
+      axios.post("https://backend-testing-1rgv.onrender.com/visit_request",{
         cemail:props.email,
         jemail:window.localStorage.getItem("email"),
         Approve:"false",

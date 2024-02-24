@@ -6,7 +6,7 @@ export default function Visit_Request()
 {   
     const [user, setUserData] = useState({Data:[]});
     useEffect(() => {
-        axios.get("http://localhost:3000/verified_company_data")
+        axios.get("https://backend-testing-1rgv.onrender.com/verified_company_data")
           .then((response) => {
             setUserData(response.data);
           })

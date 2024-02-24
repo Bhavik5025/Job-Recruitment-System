@@ -4,7 +4,7 @@ export default function Interview(props)
 {
     var [company,setCompanyData]=useState();
     useEffect(()=>{
-        axios.post("http://localhost:3000/company_details", {
+        axios.post("https://backend-testing-1rgv.onrender.com/company_details", {
             email: props.cemail
         })
             .then((response) => {

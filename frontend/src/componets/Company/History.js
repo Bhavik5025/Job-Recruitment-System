@@ -38,7 +38,7 @@ export default function Company_List() {
   useEffect(() => {
     const userEmail = window.localStorage.getItem("email");
     axios
-      .get(`http://localhost:3000/vacancies_list?email=${userEmail}`)
+      .get(`https://backend-testing-1rgv.onrender.com/vacancies_list?email=${userEmail}`)
       .then((response) => {
         setUserData(response.data);
       })

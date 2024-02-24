@@ -6,7 +6,7 @@ export default function VisitCompanyResponse() {
   var [rdata, setRdata] = useState([]);
 
   useEffect(() => {
-    axios.post("http://localhost:3000/visit_response_for_user", {
+    axios.post("https://backend-testing-1rgv.onrender.com/visit_response_for_user", {
       jemail: window.localStorage.getItem("email"),
       Approve: "true"
     }).then((data) => {

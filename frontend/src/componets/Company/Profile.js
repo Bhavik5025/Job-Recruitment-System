@@ -9,7 +9,7 @@ export default function Profile()
     const [images,setImages]=useState([]);
     
     useEffect(() => {
-    axios.post("http://localhost:3000/company_details", {
+    axios.post("https://backend-testing-1rgv.onrender.com/company_details", {
         email: window.localStorage.getItem("email")
     })
         .then((response) => {

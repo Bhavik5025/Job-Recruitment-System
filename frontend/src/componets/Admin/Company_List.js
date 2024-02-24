@@ -6,7 +6,7 @@ export default function Company_List() {
   const [user, setUserData] = useState({Data:[]});
 
   useEffect(() => {
-    axios.get("http://localhost:3000/company_data")
+    axios.get("https://backend-testing-1rgv.onrender.com/company_data")
       .then((response) => {
         setUserData(response.data);
       })

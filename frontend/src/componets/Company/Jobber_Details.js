@@ -25,12 +25,12 @@ export default function Jobber_details(props)
         marginLeft: "19px"
     }
    useEffect(()=>{
-    axios.get(`http://localhost:3000/jobber_details?email=${email}`
+    axios.get(`https://backend-testing-1rgv.onrender.com/jobber_details?email=${email}`
     ).then((data)=>{
         // console.log(data)
         setData(data.data);
     });
-    axios.post("http://localhost:3000/company_details", {
+    axios.post("https://backend-testing-1rgv.onrender.com/company_details", {
         email: window.localStorage.getItem("email")
     })
         .then((response) => {

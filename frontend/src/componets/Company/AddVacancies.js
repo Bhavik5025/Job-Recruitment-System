@@ -6,7 +6,7 @@ export default function AddVacancies()
 {
     var [status,setStatus]=useState();
     useEffect(()=>{
-        axios.post("http://localhost:3000/company_dashboard_data",{
+        axios.post("https://backend-testing-1rgv.onrender.com/company_dashboard_data",{
             email:window.localStorage.getItem("email")
           }).then((obj)=>{
             console.log(obj);

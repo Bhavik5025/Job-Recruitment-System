@@ -55,7 +55,7 @@ export default function NewVacancies()
             alert("Please fill all Details First...")
         }
         else{
-            axios.post("http://localhost:3000/add_vacancy",{
+            axios.post("https://backend-testing-1rgv.onrender.com/add_vacancy",{
                 email:window.localStorage.getItem("email"),
                 Experience:experience,
                 job_description:jobdescription,

@@ -16,7 +16,7 @@ export default function Company_SideBar()
     var [visible1,setVisible1]=useState(false);
     const navigate = useNavigate(); // Initialize the navigate function
     useEffect(()=>{
-      axios.post("http://localhost:3000/company_dashboard_data",{
+      axios.post("https://backend-testing-1rgv.onrender.com/company_dashboard_data",{
         email:window.localStorage.getItem("email")
       }).then((obj)=>{
         console.log(obj);

@@ -9,7 +9,7 @@ export default function Jobber_Visit_Request() {
     var [refresh,setRefresh]=useState(false);
   useEffect(() => {
     axios
-      .post("http://localhost:3000/visit_request_List", {
+      .post("https://backend-testing-1rgv.onrender.com/visit_request_List", {
         cemail: window.localStorage.getItem("email"),
         Approve: "false",
       })
@@ -23,7 +23,7 @@ export default function Jobber_Visit_Request() {
   }, []);
   useEffect(()=>{
     axios
-    .post("http://localhost:3000/visit_request_List", {
+    .post("https://backend-testing-1rgv.onrender.com/visit_request_List", {
       cemail: window.localStorage.getItem("email"),
       Approve: "false",
     })

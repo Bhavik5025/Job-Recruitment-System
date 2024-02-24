@@ -10,7 +10,7 @@ export default function Vacancy_view(props) {
     
     useEffect(() => {
         console.log(props.Experience)
-        axios.post("http://localhost:3000/company_dashboard_data", {
+        axios.post("https://backend-testing-1rgv.onrender.com/company_dashboard_data", {
             email: props.email
         }).then((obj) => {
             console.log(obj);
@@ -24,7 +24,7 @@ export default function Vacancy_view(props) {
         }).catch((error) => {
             console.log(error);
         });
-        axios.post("http://localhost:3000/company_details", {
+        axios.post("https://backend-testing-1rgv.onrender.com/company_details", {
             email: props.email
         })
             .then((response) => {
@@ -35,7 +35,7 @@ export default function Vacancy_view(props) {
             .catch((error) => {
                 console.error('Error fetching  data:', error);
             });
-        axios.post("http://localhost:3000/vacancy_request_data", {
+        axios.post("https://backend-testing-1rgv.onrender.com/vacancy_request_data", {
             c_email: props.email,
             j_email: window.localStorage.getItem("email"),
             Approve: "false",
@@ -56,7 +56,7 @@ export default function Vacancy_view(props) {
         }).catch((error) => {
             console.log(error)
         });
-        axios.post("http://localhost:3000/vacancy_Request_details_For_Jobber",{
+        axios.post("https://backend-testing-1rgv.onrender.com/vacancy_Request_details_For_Jobber",{
             email:window.localStorage.getItem("email"),
             Approve:"true"
         }).then((data)=>{
@@ -72,7 +72,7 @@ export default function Vacancy_view(props) {
     }, []);
 
     function applyclick() {
-        axios.post("http://localhost:3000/vacancy_request", {
+        axios.post("https://backend-testing-1rgv.onrender.com/vacancy_request", {
             c_email: props.email,
             Job_description: props.description,
             j_email: window.localStorage.getItem("email"),
@@ -101,7 +101,7 @@ export default function Vacancy_view(props) {
     };
     function updateBtn()
     {
-        axios.post("http://localhost:3000/vacancy_update",{
+        axios.post("https://backend-testing-1rgv.onrender.com/vacancy_update",{
             email:props.email,
             jdescription:props.description,
             Experience:props.Experience,
@@ -123,9 +123,7 @@ export default function Vacancy_view(props) {
     const rightColumn = images.slice(mid);
     return (<>{data ?
         <section className="h-100 gradient-custom-2" style={{ marginLeft: props.mright, marginTop: "20px" }}>
-            {/* <div className="container py-5 h-100" style={{width:"1000px"}}>
-       <div className="row d-flex justify-content-center align-items-center h-100" >
-       <div className="col col-lg-9 col-xl-7"> */}
+            
             <div className="card" style={{ width: "700px" }}>
                 <div className="rounded-top text-white d-flex flex-row" style={{ backgroundColor: "#007bff", height: "200px" }}>
                     <div className="ms-4 mt-5 d-flex flex-column" style={{ width: "150px" }}>

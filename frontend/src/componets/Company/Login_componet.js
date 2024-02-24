@@ -38,9 +38,9 @@ export default function Login_Component() {
         console.log(email);
         console.log(password);
         try {
-            axios.post("http://localhost:3000/Company_login", {
+            axios.post("https://backend-testing-1rgv.onrender.com/Company_login", {
                 email: email, 
-                pass: password
+                pass: password    
             }).then((obj)=>{
                 if (obj.status == "201") {
 
@@ -48,7 +48,7 @@ export default function Login_Component() {
                     window.localStorage.setItem("token", obj.data.data);
                     window.localStorage.setItem("email", email);
                     window.localStorage.setItem("type", "company");
-                    setPage("true");
+                    
                     history("/companydashboard");
                 }
                 else{
