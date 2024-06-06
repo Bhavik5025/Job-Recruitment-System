@@ -14,16 +14,15 @@ export default function Selection()
     {
         window.location.href="./Login/job_seeker";
     }
-    return(<> <div className="centered-div" style={{margin:"50px"}}>
+    return(<> <div className="flex flex-col items-center justify-center mx-auto shadow-lg p-8 m-10" style={{margin:"50px"}}>
         <img src={myimage} alt="Your mage" className="im1"/>
-    <h1 className="heading">Welcome Back!</h1>
-    <div className="button-container">
-        <button className="centered-button" onClick={adminClick}>Admin</button>
-        <button className="centered-button" onClick={CompanyClick}>Company</button>
+    <h1 className="heading m-10">Welcome Back!</h1>
+    <div className="flex flex-col md:flex-row md:justify-center">
+    <button className="centered-button mb-2 md:mr-2" onClick={adminClick}>Admin</button>
+    <button className="centered-button mb-2 md:mr-2" onClick={CompanyClick}>Company</button>
+    <button className="centered-button mb-2 md:mr-2" onClick={JobSeekerClick}>Job Seeker</button>
+</div>
 
-        <button className="centered-button1" onClick={JobSeekerClick}>Job Seeker</button>
-
-    </div>
 
 </div> </>)
 }
