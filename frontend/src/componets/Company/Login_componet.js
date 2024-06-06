@@ -61,7 +61,7 @@ export default function Login_Component() {
             alert(error);
         }
     }
-    return (<><div className="login-div">
+    return (<><div >
 
         <label className="parent_label">Sign in</label>
         <form onSubmit={btnclick}>
@@ -81,7 +81,7 @@ export default function Login_Component() {
                 </div>
             </div>
             <div className="d-flex justify-content-center">
-                <button type="submit" className="centered-button" style={{ marginTop: "20px", fontFamily: "Poppins" }}>Log In</button>
+                <button type="submit" className="centered-button ml-20" style={{ marginTop: "20px", fontFamily: "Poppins" }}>Log In</button>
             </div>
 
         </form>

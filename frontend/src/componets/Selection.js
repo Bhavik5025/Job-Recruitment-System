@@ -14,8 +14,8 @@ export default function Selection()
     {
         window.location.href="./Login/job_seeker";
     }
-    return(<> <div className="flex flex-col items-center justify-center mx-auto shadow-lg p-8 m-10" style={{margin:"50px"}}>
-        <img src={myimage} alt="Your mage" className="im1"/>
+    return(<> <div className="flex flex-col items-center justify-center mx-auto shadow-lg p-8 md:p-8 md:mt-10 md:shadow-none">
+    <img src={myimage} alt="Your mage" className="im1"/>
     <h1 className="heading m-10">Welcome Back!</h1>
     <div className="flex flex-col md:flex-row md:justify-center">
     <button className="centered-button mb-2 md:mr-2" onClick={adminClick}>Admin</button>

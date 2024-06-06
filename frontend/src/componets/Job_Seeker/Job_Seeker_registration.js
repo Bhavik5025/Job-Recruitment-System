@@ -193,8 +193,8 @@ function saveUserData(data) {
 
 // ...
 
-return(<><div className="login-div">
-    <label className="parent_label">Sign Up</label>
+return(<><div className="h-screen sm:mt-20 md:mt-10 lg:mt-0 overflow-y-auto">
+<label className="parent_label mt-10">Sign Up</label>
     <form onSubmit={btnclick}>
             <div className="input-div">
                 <i className="fa fa-user" aria-hidden="true" style={iconstyle}></i>
@@ -299,7 +299,7 @@ return(<><div className="login-div">
                 </div>
             </div>
             <div className="d-flex justify-content-center">
-                <button type="submit" className="centered-button" style={{ marginTop: "20px", fontFamily: "Poppins" }}>{loading==false?"Register":"Loading"}</button>
+                <button type="submit" className="centered-button ml-20" style={{ marginTop: "20px", fontFamily: "Poppins" }}>{loading==false?"Register":"Loading"}</button>
             </div>
             </form>
     </div></>)

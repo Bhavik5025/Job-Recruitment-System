@@ -63,35 +63,32 @@ export default function Login_Form() {
             setEmail('');
             setPassword('');
         }
-       
+
     };
 
 
     return (<>
-
-        <div className="login-div">
-
+  <div className="justify-content-center">
             <label className="parent_label">Sign in</label>
             <form onSubmit={submitbtn}>
                 <div className="input-div">
-                    <i className="fa fa-mobile-phone" style={iconstyle} ></i>
+                    <i className="fa fa-mobile-phone" style={iconstyle}></i>
                     <div className="input-bx" style={emailfield}>
-                        <input type="email" required="required" onChange={emailenter} value={email} />
+                        <input type="email" required onChange={emailenter} value={email} />
                         <span className="span-text">Email Id</span>
                     </div>
                 </div>
 
                 <div className="input-div1">
-                    <i className="gg-password" style={iconstyle} ></i>
+                    <i className="gg-password" style={iconstyle}></i>
                     <div className="input-bx" style={passwordfield}>
-                        <input type="password" required="required" onChange={passwordenter} value={password} />
+                        <input type="password" required onChange={passwordenter} value={password} />
                         <span className="span-text">Password</span>
                     </div>
                 </div>
-                <div className="d-flex justify-content-center">
-                    <button type="submit" className="centered-button" style={{ marginTop: "20px", fontFamily: "Poppins" }}>Log In</button>
+                <div className="flex justify-center">
+                    <button type="submit" className="centered-button ml-20 mt-2" style={{ fontFamily: "Poppins" }}>Log In</button>
                 </div>
-
             </form>
         </div>
     </>

@@ -8,6 +8,8 @@ export default function Login_For()
 {
     const { userId } = useParams();
     return(<>
+    <div className="flex flex-col items-center justify-center h-screen">
    {userId==="admin"?<Login/>:userId==="company"?<Login_company/>:userId==="job_seeker"?<JobSeeker_Login/>:<Navigate to="/"/>}
+   </div>
     </>)
 }

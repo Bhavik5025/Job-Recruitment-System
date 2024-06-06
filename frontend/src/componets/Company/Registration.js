@@ -119,8 +119,10 @@ export default function Registration({sendData}) {
         }
     }
     
-    return (<div className="login-div">
-        <label className="parent_label">Sign Up</label>
+    return (<>
+    <div className="mt-20"></div>
+  <div className="h-screen sm:mt-20 md:mt-10 lg:mt-0 overflow-y-auto">
+    <label className="parent_label mt-10 sm:mt-20 md:mt-10 lg:mt-0 ">Sign Up</label>
         <form onSubmit={btnClk}>
             <div className="input-div">
                 <i className="fa fa-building-o" aria-hidden="true" style={iconstyle}></i>
@@ -175,8 +177,10 @@ export default function Registration({sendData}) {
                 </div>
             </div>
             <div className="d-flex justify-content-center">
-                <button type="submit" className="centered-button" style={{ marginTop: "20px", fontFamily: "Poppins" }}>Register</button>
+                <button type="submit" className="centered-button ml-20" style={{ marginTop: "20px", fontFamily: "Poppins" }}>Register</button>
             </div>
         </form>
-    </div>)
+        </div>
+
+    </>)
 }
