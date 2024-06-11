@@ -68,26 +68,26 @@ export default function Login_Form() {
 
 
     return (<>
-  <div className="justify-content-center">
-            <label className="parent_label">Sign in</label>
-            <form onSubmit={submitbtn}>
+  <div  className="d-flex flex-col items-center justify-center mx-auto">
+
+<label className="parent_label ml-10">Sign in</label>   <form onSubmit={submitbtn}>
                 <div className="input-div">
-                    <i className="fa fa-mobile-phone" style={iconstyle}></i>
-                    <div className="input-bx" style={emailfield}>
+                    <i className="fa fa-mobile-phone ml-3 " style={iconstyle}></i>
+                    <div className="input-bx ml-5" style={emailfield}>
                         <input type="email" required onChange={emailenter} value={email} />
                         <span className="span-text">Email Id</span>
                     </div>
                 </div>
 
-                <div className="input-div1">
-                    <i className="gg-password" style={iconstyle}></i>
-                    <div className="input-bx" style={passwordfield}>
+                <div className="input-div">
+                    <i className="gg-password " style={iconstyle}></i>
+                    <div className="input-bx ml-10" style={passwordfield}>
                         <input type="password" required onChange={passwordenter} value={password} />
                         <span className="span-text">Password</span>
                     </div>
                 </div>
                 <div className="flex justify-center">
-                    <button type="submit" className="centered-button ml-20 mt-2" style={{ fontFamily: "Poppins" }}>Log In</button>
+                    <button type="submit" className="centered-button ml-10 mt-4" style={{ fontFamily: "Poppins" }}>Log In</button>
                 </div>
             </form>
         </div>

@@ -6,20 +6,9 @@ export default function Login_Component() {
     var [Page, setPage] = useState('login');
     var [password, setPassword] = useState('');
     const history=useNavigate();
-    const emailfield = {
-        marginLeft: "19px"
-    }
-    const passwordfield = {
-        marginLeft: "33px"
-    }
-    const buttonstyle = {
-        width: "100px",
-        marginTop: "20px",
-        backgroundColor: "#007bff",
-        fontFamily: "Poppins",
-        fontWeight: "bold",
-        color: "#fff"
-    }
+    const [loading, setLoading] = useState(false);
+
+   
     function emailenter(event) {
         setEmail(event.target.value);
     }
@@ -35,6 +24,7 @@ export default function Login_Component() {
 
     function btnclick(event) {
         event.preventDefault();
+        setLoading(true);
         console.log(email);
         console.log(password);
         try {
@@ -56,18 +46,22 @@ export default function Login_Component() {
                 }
             }).catch((error)=>{
                 console.log(error);
+            }).finally(()=>{
+                setLoading(false);
             })
         } catch (error) {
+            setLoading(false);
             alert(error);
         }
+      
     }
-    return (<><div >
+    return (<><div  className="d-flex flex-col items-center justify-center mx-auto">
 
-        <label className="parent_label">Sign in</label>
+        <label className="parent_label ml-10">Sign in</label>
         <form onSubmit={btnclick}>
-            <div className="input-div">
+            <div className="input-div w-full">
                 <i className="fa fa-envelope" style={iconstyle} ></i>
-                <div className="input-bx" style={emailfield}>
+                <div className="input-bx ml-5" >
                     <input type="email" required="required" onChange={emailenter} value={email} />
                     <span className="span-text">Email Id</span>
                 </div>
@@ -75,13 +69,13 @@ export default function Login_Component() {
 
             <div className="input-div1">
                 <i className="gg-password" style={iconstyle} ></i>
-                <div className="input-bx" style={passwordfield}>
+                <div className="input-bx ml-5 w-full" >
                     <input type="password" required="required" onChange={passwordenter} minLength={6} value={password} />
                     <span className="span-text">Password</span>
                 </div>
             </div>
             <div className="d-flex justify-content-center">
-                <button type="submit" className="centered-button ml-20" style={{ marginTop: "20px", fontFamily: "Poppins" }}>Log In</button>
+            <button type="submit" disabled={loading} className="centered-button ml-10" style={{ marginTop: "20px", fontFamily: "Poppins" }}>{loading ? 'Loading...' : 'Login'}</button>
             </div>
 
         </form>

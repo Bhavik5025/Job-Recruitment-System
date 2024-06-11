@@ -1,177 +1,268 @@
 import axios from "axios";
-import React,{useEffect, useState} from "react";
-export default function Company_view(props)
-{
+import React, { useEffect, useState } from "react";
+
+export default function Company_view(props) {
   const [loading, setLoading] = useState(false);
   const [loading1, setLoading1] = useState(false);
-  var [data,setData]=useState();
-  var [images,setImages]=useState([]);
-  var [date,setDate]=useState();
-  var [time,setTime]=useState();
-  var [status,setStatus]=useState(false);
-  const iconstyle = {
-      fontSize: "24px",
+  var [data, setData] = useState();
+  var [images, setImages] = useState([]);
+  var [date, setDate] = useState();
+  var [time, setTime] = useState();
+  var [status, setStatus] = useState(false);
 
-      marginTop: "8px",
+  const iconstyle = {
+    fontSize: "24px",
+    marginTop: "8px",
   };
+
   const emailfield = {
-      marginLeft: "19px"
+    marginLeft: "19px",
+  };
+
+  function dateEnter(e) {
+    setDate(e.target.value);
   }
-  function dateEnter(e)
-  {
-   setDate(e.target.value);
+
+  function timeEnter(e) {
+    setTime(e.target.value);
   }
-  function timeEnter(e)
-  {
-   setTime(e.target.value);
-  }
-    useEffect(()=>{
-      axios.post("https://backend-testing-1rgv.onrender.com/company_dashboard_data", {
-        email: props.email
-    }).then((obj) => {
+
+  useEffect(() => {
+    axios
+      .post("https://backend-testing-1rgv.onrender.com/company_dashboard_data", {
+        email: props.email,
+      })
+      .then((obj) => {
         console.log(obj);
         if (obj.data.data === true) {
-            setData(obj.data.details);
-           // console.log(obj.data.details.logo);
-            //   setLogo(obj.data.details.logo);
-            setImages(obj.data.details.company_images)
-            //   setDescription(obj.data.details.description)
+          setData(obj.data.details);
+          setImages(obj.data.details.company_images);
         }
-    }).catch((error) => {
+      })
+      .catch((error) => {
         console.log(error);
-    });
-    
-    axios.post("https://backend-testing-1rgv.onrender.com/visit_request_data",{
-      c_email:props.email,
-      j_email:window.localStorage.getItem("email"),
-      Approve:"false",
-     
-    }).then((data)=>{
-      console.log(data.data.data)
-      if(data.data.data=="success")
-      {
-        setStatus(true);
-      }
-    }).catch((error)=>{
-      console.log(error)
-    })
-    },[])
-    function Approve()
-    {
-      setLoading(true);
-      console.log(props.email);
-        axios.put("https://backend-testing-1rgv.onrender.com/approve",{
-          Email:props.email
-        }).then((data)=>{
-          alert("Company Approve SuccessFully");
-          window.location.reload();
-          setLoading(false);
-        }).catch((error)=>{
-          alert(error);
-          setLoading(false)
-        })
-    }
-    function Reject()
-    {
-      setLoading1(true)
-      axios.delete("https://backend-testing-1rgv.onrender.com/remove",{
-        data: {
-          Email: props.email
+      });
+
+    axios
+      .post("https://backend-testing-1rgv.onrender.com/visit_request_data", {
+        c_email: props.email,
+        j_email: window.localStorage.getItem("email"),
+        Approve: "false",
+      })
+      .then((data) => {
+        console.log(data.data.data);
+        if (data.data.data === "success") {
+          setStatus(true);
         }
-      }).then((data)=>{
-        alert("Company Remove SuccessFully");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  function Approve() {
+    setLoading(true);
+    console.log(props.email);
+    axios
+      .put("https://backend-testing-1rgv.onrender.com/approve", {
+        Email: props.email,
+      })
+      .then((data) => {
+        alert("Company Approve Successfully");
+        window.location.reload();
+        setLoading(false);
+      })
+      .catch((error) => {
+        alert(error);
+        setLoading(false);
+      });
+  }
+
+  function Reject() {
+    setLoading1(true);
+    axios
+      .delete("https://backend-testing-1rgv.onrender.com/remove", {
+        data: {
+          Email: props.email,
+        },
+      })
+      .then((data) => {
+        alert("Company Remove Successfully");
         window.location.reload();
         setLoading1(false);
-      }).catch((error)=>{
+      })
+      .catch((error) => {
         alert(error);
         setLoading1(false);
+      });
+  }
+
+  function ApplyforVisitRequest(event) {
+    event.preventDefault();
+    axios
+      .post("https://backend-testing-1rgv.onrender.com/visit_request", {
+        cemail: props.email,
+        jemail: window.localStorage.getItem("email"),
+        Approve: "false",
+        Date: date,
+        Time: time,
       })
-    }
-    function ApplyforVisitRequest(event)
-    {
-      event.preventDefault();
-      axios.post("https://backend-testing-1rgv.onrender.com/visit_request",{
-        cemail:props.email,
-        jemail:window.localStorage.getItem("email"),
-        Approve:"false",
-        Date:date,
-        Time:time
-      }).then((data)=>{
-        console.log(data)
-        if(data.data.data=="success")
-        {
+      .then((data) => {
+        console.log(data);
+        if (data.data.data === "success") {
           setStatus(true);
-          alert("Visit Request Successfully Send.please Wait for Company Response")
+          alert("Visit Request Successfully Send. Please wait for company response.");
         }
-      }).catch((error)=>{
-        console.log(error)
       })
-    }
-    
-    const mid = Math.ceil(images.length / 2);
-    const leftColumn = images.slice(0, mid);
-    const rightColumn = images.slice(mid);
-    return(<><div className="card" style={{width: "700px",marginTop:"20px",marginLeft:"270px"}}>
-    {props.show!="true"?<img src={props.img} className="card-img-top" alt="..." />:null}
-    <div className="card-body">
-      <h5 className="card-title"><i class="fa fa-building-o" aria-hidden="true"></i>Company Name:-{props.name}</h5>
-      <ul class="list-group list-group-flush">
-      <li className="list-group-item"><i class="fa fa-address-card" aria-hidden="true"></i>Address:-{props.address}</li>
-      <li className="list-group-item"><i class="fa fa-mobile" aria-hidden="true" style={{fontSize:"20px",width:"20px"}}></i>Mobile No.:-{props.mobile}</li>
-      <li className="list-group-item"><i class="fa fa-envelope" aria-hidden="true"></i>Email:-{props.email}</li>
-      {props.status=="unverified"?<li className="card text-center" style={{alignItems:"center",margin:"20px",border:"none"}}><div><button className="centered-button1" style={{marginRight:"20px", background:"green"}} onClick={Approve}>{loading ? 'Loading...' : 'Approve'}</button><button className="centered-button1" style={{background:"red"}} onClick={Reject}>{loading1 ? 'Loading...' : 'Reject'}</button></div></li>:console.log()}
-      </ul>
-      
-      {props.show=="true"?<div className="mb-5">
-                            <p className="lead fw-normal mb-1">About Company</p>
-                            <div className="p-4" style={{ backgroundColor: "#f8f9fa" }}>
-                                {data ? <>
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 
-                                    <p className="font-italic mb-1"><i class="fa fa-asterisk" aria-hidden="true"></i>{data.description}</p>
-                                    <p className="font-italic mb-1"><i class="fa fa-clock-o" aria-hidden="true"></i>Opening Time:-{data.opening_time}<i class="fa fa-clock-o" aria-hidden="true" style={{ marginLeft: "40px" }}></i>Closing Time:-{data.closing_time}</p>
-                                    <div className="d-flex justify-content-between align-items-center mb-4">
+  const mid = Math.ceil(images.length / 2);
+  const leftColumn = images.slice(0, mid);
+  const rightColumn = images.slice(mid);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-                                        <p className="lead fw-normal mb-0" style={{ marginTop: "10px" }}>photos</p>
+  const handleImageClick = () => {
+    setIsModalOpen(true);
+  };
 
-                                    </div>
-                                    <div className="row g-2">
-                                        <div class="col mb-2">
-                                            {leftColumn.map((image, index) => (
-                                                <img key={index} src={image} alt={`Image ${index}`} className="w-100 rounded-3" style={{ height: "200px", margin: "10px" }} />
-                                            ))}
-                                        </div>
-                                        <div className="col mb-2">
-                                            {rightColumn.map((image, index) => (
-                                                <img key={index} src={image} alt={`Image ${index}`} className="w-100 rounded-3" style={{ height: "200px", margin: "10px" }} />
-                                            ))}
-                                        </div>
-                                    </div>
-                                
-                            <form onSubmit={ApplyforVisitRequest}>
-                                 {status==true?null: <> <li className="list-group-item" style={{ margin: "10px" }}><div className="input-div2" style={{marginLeft:"10px"}} >
-                <i className="fa fa-calendar" aria-hidden="true" style={iconstyle}></i>
-                <h5 style={{marginTop:"10px"}}>Visit Date</h5>
-                <div className="input-bx" style={emailfield}>
-                    <input type="date" required="required" onChange={dateEnter} value={date} />
-                    
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+  return (
+    <>
+      <div className={`card ${isModalOpen ? 'blur-sm' : ''}`}>
+        <div className="flex justify-center">
+          {props.show !== "true" ? (
+            <img
+              src={props.img}
+              className="w-72 max-w-full h-auto cursor-pointer"
+              alt="..."
+              onClick={handleImageClick}
+            />
+          ) : null}
+        </div>
+        <div className="card-body">
+          <h5 className="card-title">
+            <i className="fa fa-building-o" aria-hidden="true"></i> Company Name:-{props.name}
+          </h5>
+          <ul className="list-group list-group-flush">
+          <li className={`list-group-item ${props.address.length > 20 ? 'w-full' : 'w-auto'}`}>
+    <i className="fa fa-address-card mr-2" aria-hidden="true"></i> Address:-{props.address}
+</li>
+
+            <li className="list-group-item">
+              <i className="fa fa-mobile" aria-hidden="true" style={{ fontSize: "20px", width: "20px" }}></i> Mobile No.:-{props.mobile}
+            </li>
+            <li className="list-group-item">
+              <i className="fa fa-envelope" aria-hidden="true"></i> Email:-{props.email}
+            </li>
+            {props.status === "unverified" ? (
+              <li className="card text-center" style={{ alignItems: "center", margin: "20px", border: "none" }}>
+                <div>
+                  <button className="centered-button1 mt-3" style={{ background: "green" }} onClick={Approve}>
+                    {loading ? 'Loading...' : 'Approve'}
+                  </button>
+                  <button className="centered-button1" style={{ background: "red" }} onClick={Reject}>
+                    {loading1 ? 'Loading...' : 'Reject'}
+                  </button>
                 </div>
-            </div></li>
-            <li className="list-group-item" style={{ margin: "10px" }}><div className="input-div2" style={{marginLeft:"10px"}} >
-                <i className="fa fa-clock-o" aria-hidden="true" style={iconstyle}></i>
-                <h5 style={{marginTop:"10px"}}>Visit time</h5>
-                <div className="input-bx" style={emailfield}>
-                    <input type="time" required="required" onChange={timeEnter} value={time} />
-                    
-                </div>
-               
-            </div></li></> }  
-            
-            {props.show=="true"? status==true?<button className="centered-button" type="submit" style={{ marginLeft: "260px", marginTop: "10px"}} disabled>Applied</button>:(<button className="centered-button" type="submit" style={{ marginLeft: "260px", marginTop: "10px"}}>Apply</button>):null}
-                                              </form>
-                                </> : null}
-
+              </li>
+            ) : console.log()}
+          </ul>
+          {props.show === "true" ? (
+            <div className="mb-5">
+              <p className="lead fw-normal mb-1">About Company</p>
+              <div className="p-4" style={{ backgroundColor: "#f8f9fa" }}>
+                {data ? (
+                  <>
+                    <p className="font-italic mb-1">
+                      <i className="fa fa-asterisk" aria-hidden="true"></i>
+                      {data.description}
+                    </p>
+                    <p className="font-italic mb-1">
+                      <i className="fa fa-clock-o" aria-hidden="true"></i>
+                      Opening Time:-{data.opening_time}
+                      <i className="fa fa-clock-o" aria-hidden="true" style={{ marginLeft: "40px" }}></i>
+                      Closing Time:-{data.closing_time}
+                    </p>
+                    <div className="d-flex justify-content-between align-items-center mb-4">
+                      <p className="lead fw-normal mb-0" style={{ marginTop: "10px" }}>Photos</p>
+                    </div>
+                    <div className="row g-2">
+                      <div className="col mb-2">
+                        {leftColumn.map((image, index) => (
+                          <img key={index} src={image} alt={`Image ${index}`} className="w-100 rounded-3" style={{ height: "200px", margin: "10px" }} />
+                        ))}
+                      </div>
+                      <div className="col mb-2">
+                        {rightColumn.map((image, index) => (
+                          <img key={index} src={image} alt={`Image ${index}`} className="w-100 rounded-3" style={{ height: "200px", margin: "10px" }} />
+                        ))}
+                      </div>
+                    </div>
+                    <form onSubmit={ApplyforVisitRequest}>
+                      {status === true ? null : (
+                        <>
+                          <li className="list-group-item" style={{ margin: "10px" }}>
+                            <div className="input-div2" style={{ marginLeft: "10px" }}>
+                              <i className="fa fa-calendar" aria-hidden="true" style={iconstyle}></i>
+                              <h5 style={{ marginTop: "10px" }}>Visit Date</h5>
+                              <div className="input-bx" style={emailfield}>
+                                <input type="date" required="required" onChange={dateEnter} value={date} />
+                              </div>
                             </div>
-                        </div>:null}
-    </div>
-  </div></>)
+                          </li>
+                          <li className="list-group-item" style={{ margin: "10px" }}>
+                            <div className="input-div2" style={{ marginLeft: "10px" }}>
+                              <i className="fa fa-clock-o" aria-hidden="true" style={iconstyle}></i>
+                              <h5 style={{ marginTop: "10px" }}>Visit Time</h5>
+                              <div className="input-bx" style={emailfield}>
+                                <input type="time" required="required" onChange={timeEnter} value={time} />
+                              </div>
+                            </div>
+                          </li>
+                        </>
+                      )}
+                      {props.show === "true" ? (
+                        status === true ? (
+                          <button className="centered-button" type="submit" style={{ marginLeft: "260px", marginTop: "10px" }} disabled>
+                            Applied
+                          </button>
+                        ) : (
+                          <button className="centered-button" type="submit" style={{ marginLeft: "260px", marginTop: "10px" }}>
+                            Apply
+                          </button>
+                        )
+                      ) : null}
+                    </form>
+                  </>
+                ) : null}
+              </div>
+            </div>
+          ) : null}
+        </div>
+      </div>
+      {isModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75">
+          <div className="relative">
+            <img
+              src={props.img}
+              className="max-w-auto max-h-screen"
+              alt="Zoomed Image"
+            />
+            <button
+              className="absolute top-2 right-2 text-white text-3xl"
+              onClick={closeModal}
+            >
+              &times;
+            </button>
+          </div>
+        </div>
+      )}
+    </>
+  );
 }

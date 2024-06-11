@@ -1,3 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.input-bx {
+  @apply relative w-auto;
+}
+
+.input-field {
+  @apply w-full p-2.5 border border-black rounded-md outline-none text-lg transition-all;
+}
+
+.input-field:valid ~ .span-text,
+.input-field:focus ~ .span-text {
+  @apply text-blue-500 transform -translate-x-1.5 -translate-y-1.5 text-xs font-semibold bg-white px-2;
+}
+
+.input-field:valid,
+.input-field:focus {
+  @apply border-2 border-blue-500;
+}
+
+.span-text {
+  @apply absolute left-0 p-2 text-sm text-blue-500 uppercase pointer-events-none transition-all;
+}
+
 body {
   display: flex;
   justify-content: center;
@@ -148,7 +174,7 @@ body {
 
 .parent_label {
   font-family: Poppins;
-  margin-left: 235PX;
+  
   color: #007bff;
   font-weight: bold;
   font-size: 30px;
@@ -157,27 +183,27 @@ body {
 .input-div {
   display: flex;
   margin-top: 20px;
-  margin-left: 80px;
+
 }
 
 .input-div1 {
   display: flex;
   margin-top: 20px;
-  margin-left: 70px;
+  
 }
 .input-div4 {
   margin-top: 20px;
-  margin-left: 70px;
+  
 }
 .input-div2 {
   display: flex;
   margin-top: 20px;
-  margin-left: 75px;
+
 }
 .input-div3 {
   display: flex;
   margin-top: 20px;
-  margin-left: 90px;
+  
 }
 
 .icon {
@@ -186,11 +212,7 @@ body {
   color: #007bff;
 }
 
-.input-bx {
-  position: relative;
-  width: 370px;
 
-}
 
 .input-bx input {
   width: 100%;

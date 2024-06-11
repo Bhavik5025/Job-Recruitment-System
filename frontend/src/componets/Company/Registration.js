@@ -10,20 +10,8 @@ export default function Registration({sendData}) {
     var [company, setCompany] = useState('');
     var [confirmpassword, setConfirmPassword] = useState('');
     var [url, setUrl] = useState('');
-    const emailfield = {
-        marginLeft: "19px"
-    }
-    const passwordfield = {
-        marginLeft: "33px"
-    }
-    const buttonstyle = {
-        width: "100px",
-        marginTop: "20px",
-        backgroundColor: "#007bff",
-        fontFamily: "Poppins",
-        fontWeight: "bold",
-        color: "#fff"
-    }
+    const [loading, setLoading] = useState(false);
+
     function emailenter(event) {
         setEmail(event.target.value);
     }
@@ -62,12 +50,14 @@ export default function Registration({sendData}) {
     };
     
     function btnClk(event) {
+        
         event.preventDefault();
-    
+        setLoading(true);
         if (password !== confirmpassword) {
             alert("Password and Confirm Password must be the same");
             setPassword('');
             setConfirmPassword('');
+            setLoading(false);
         } else {
             const form = new FormData();
             form.append("file", certificate);
@@ -83,6 +73,7 @@ export default function Registration({sendData}) {
                 if (!res.ok) {
                     
                     throw new Error(`HTTP error! Status: ${res.status}`);
+                    
                 }
                 return res.json();
             })
@@ -101,6 +92,7 @@ export default function Registration({sendData}) {
                 .then((obj) => {
                     console.log(obj);
                     if (obj.data.error) {
+                        
                         alert(obj.data.error);
                         
                     }
@@ -110,77 +102,88 @@ export default function Registration({sendData}) {
 
                     }
                 })
-                .catch((err) => console.error(err));
+                .catch((err) => console.error(err)).finally(()=>{
+                    setLoading(false);
+                });
             })
             .catch((err) => {
                 console.error(err);
                 
+            }).finally(()=>{
+                setLoading(false);
             });
         }
     }
     
     return (<>
-    <div className="mt-20"></div>
-  <div className="h-screen sm:mt-20 md:mt-10 lg:mt-0 overflow-y-auto">
-    <label className="parent_label mt-10 sm:mt-20 md:mt-10 lg:mt-0 ">Sign Up</label>
-        <form onSubmit={btnClk}>
-            <div className="input-div">
-                <i className="fa fa-building-o" aria-hidden="true" style={iconstyle}></i>
-                <div className="input-bx" style={emailfield}>
-                    <input type="text" required="required" onChange={companyEnter} value={company} />
-                    <span className="span-text">Company Name</span>
-                </div>
+ <div className="mt-20"></div>
+<div className="h-screen sm:mt-20 md:mt-10 lg:mt-0 overflow-y-auto">
+    <label className="parent_label mt-10 sm:mt-20 md:mt-10 lg:mt-0 text-xl font-semibold">Sign Up</label>
+    <form onSubmit={btnClk} className="w-full max-w-md mx-auto">
+        <div className="input-div flex items-center mt-5 w-full">
+            <i className="fa fa-building-o text-gray-500 text-xl" aria-hidden="true" style={iconstyle}></i>
+            <div className="input-bx ml-5 flex-grow relative">
+                <input type="text" required="required" onChange={companyEnter} value={company} className="input-field sm:w-32" />
+                <span className="span-text">Company Name</span>
             </div>
-            <div className="input-div2">
-                <i className="fa fa-address-card" aria-hidden="true" style={iconstyle}></i>
-                <div className="input-bx" style={emailfield}>
-                    <textarea type="text" required="required" onChange={addressEnter} value={address} />
-                    <span className="span-text">Address</span>
-                </div>
-            </div>
-            <div className="input-div3">
-                <i className="fa fa-mobile" aria-hidden="true" style={iconstyle1}></i>
-                <div className="input-bx" style={emailfield}>
-                    <input type="tel" required="required" onChange={mobileEnter} value={mobile} pattern="[789][0-9]{9}" />
-                    <span className="span-text">Mobile No.</span>
-                </div>
-            </div>
-            <div className="input-div">
-                <i className="fa fa-upload" aria-hidden="true" style={iconstyle}></i>
-
-                <div className="mb-3"
-                    style={{ marginLeft: "20px", width: "370px", border: "1px solid #000000", borderRadius: "5px" }}>
-                    <span className="span-text" style={{ marginLeft: "10px", color: "#007bff" }}>Upload Company's Certificate</span>
-                    <input className="form-control" type="file" onChange={cenrtificateEnter} required />
-                </div>
-
-            </div>
-            <div className="input-div">
-                <i className="fa fa-envelope" aria-hidden="true" style={iconstyle}></i>
-                <div className="input-bx" style={emailfield}>
-                    <input type="email" required="required" onChange={emailenter} value={email} />
-                    <span className="span-text">Email Id</span>
-                </div>
-            </div>
-            <div className="input-div1">
-                <i className="gg-password" style={iconstyle} ></i>
-                <div className="input-bx" style={passwordfield}>
-                    <input type="password" required="required" onChange={passwordenter} value={password} minLength={6}/>
-                    <span className="span-text">Password</span>
-                </div>
-            </div>
-            <div className="input-div1">
-                <i className="gg-password" style={iconstyle} ></i>
-                <div className="input-bx" style={passwordfield}>
-                    <input type="password" minLength={6} required="required" onChange={confirmpasswordEnter} value={confirmpassword} />
-                    <span className="span-text">Confirm Password</span>
-                </div>
-            </div>
-            <div className="d-flex justify-content-center">
-                <button type="submit" className="centered-button ml-20" style={{ marginTop: "20px", fontFamily: "Poppins" }}>Register</button>
-            </div>
-        </form>
         </div>
+        
+        <div className="input-div flex items-center  w-full">
+            <i className="fa fa-address-card text-gray-500 text-xl" aria-hidden="true" style={iconstyle}></i>
+            <div className="input-bx ml-3 flex-grow relative">
+                <textarea type="text" required="required" onChange={addressEnter} value={address} className="input-field sm:w-full"></textarea>
+                <span className="span-text">Address</span>
+            </div>
+        
+         </div>
+        
+        <div className="input-div flex items-center  w-full">
+            <i className="fa fa-mobile text-gray-500 text-xl" aria-hidden="true" style={iconstyle1}></i>
+            <div className="input-bx ml-7 flex-grow relative">
+                <input type="tel" required="required" onChange={mobileEnter} value={mobile} pattern="[789][0-9]{9}" className="input-field" />
+                <span className="span-text">Mobile No.</span>
+            </div>
+        </div>
+        
+        <div className="input-div flex items-center  w-full">
+            <i className="fa fa-upload text-gray-500 text-xl" aria-hidden="true" style={iconstyle}></i>
+            <div className="ml-5 flex-grow relative">
+                <span className="block mb-1 text-gray-700">Upload Company's Certificate</span>
+                <input className="form-control w-full border border-black rounded-md py-2 px-4" type="file" onChange={cenrtificateEnter} required />
+            </div>
+        </div>
+        
+        <div className="input-div flex items-center w-full">
+            <i className="fa fa-envelope text-gray-500 text-xl" aria-hidden="true" style={iconstyle}></i>
+            <div className="input-bx ml-5 flex-grow relative">
+                <input type="email" required="required" onChange={emailenter} value={email} className="input-field" />
+                <span className="span-text">Email Id</span>
+            </div>
+        </div>
+        
+        <div className="input-div flex items-center w-full">
+            <i className="gg-password text-gray-500 text-xl" style={iconstyle}></i>
+            <div className="input-bx ml-5 flex-grow relative">
+                <input type="password" required="required" onChange={passwordenter} value={password} minLength={6} className="input-field" />
+                <span className="span-text">Password</span>
+            </div>
+        </div>
+        
+        <div className="input-div flex items-center  w-full">
+            <i className="gg-password text-gray-500 text-xl" style={iconstyle}></i>
+            <div className="input-bx ml-5 flex-grow relative">
+                <input type="password" required="required" onChange={confirmpasswordEnter} value={confirmpassword} minLength={6} className="input-field" />
+                <span className="span-text">Confirm Password</span>
+            </div>
+        </div>
+        
+        <div className="flex justify-center mt-2 ml-10">
+            <button type="submit" 
+        disabled={loading}  className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500" style={{ fontFamily: "Poppins" }}> {loading ? 'Loading...' : 'Register'}</button>
+        </div>
+    </form>
+</div>
+
 
     </>)
 }

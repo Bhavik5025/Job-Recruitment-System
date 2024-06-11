@@ -22,6 +22,8 @@ export default function HomeScreen() {
     }
    },[])
     return (<>
-      <Selection/>
-       </>);
+      <div className="h-auto">   
+           <Selection/>
+      </div>
+      </>);
 }

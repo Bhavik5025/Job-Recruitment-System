@@ -26,7 +26,7 @@ export default function Login_Form_Company() {
                          className="fw-bold text-body" onClick={transfer}><u
                             style={{fontFamily: "Poppins", color: "#007bff",fontWeight: "bold",cursor:"pointer"}}>Company</u></a>
                   
-                </p>:<p className="text-center text-muted mt-5 mb-0 ml-12">if You are Already User? Login  <a
+                </p>:<p className="text-center text-muted mt-5 mb-0 ml-12">If You are Already User? Login  <a
                          className="fw-bold text-body" onClick={transfer1}><u
                             style={{fontFamily: "Poppins", color: "#007bff",fontWeight: "bold",cursor:"pointer"}}>Company</u></a>
                   
