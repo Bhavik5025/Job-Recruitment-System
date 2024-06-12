@@ -5,6 +5,7 @@ export default function Company_dashBoard()
 {
     const history=useNavigate();
     const token=window.localStorage.getItem("token");
+    
     useEffect(()=>{
         if(token==null)
         {

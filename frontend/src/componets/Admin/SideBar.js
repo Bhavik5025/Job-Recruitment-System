@@ -258,31 +258,31 @@ const Sidebar = (props) => {
           <div className="h-full px-3 py-4 overflow-y-auto dark:bg-gray-800 bg-blue-600">
             {/* Close button for the sidebar on mobile */}
             <div style={{ display: 'flex', flexDirection: 'column' }}>
-            {window.innerWidth <= 768 && (
-              <button
-                type="button"
-                onClick={toggleSidebar}
-                className="absolute top-4 right-2 z-50 inline-flex items-center p-2 text-sm text-gray-500 rounded-lg bg-white shadow-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-              >
-                <span className="sr-only">Close sidebar</span>
-                <i className="fa fa-window-close ml-2" aria-hidden="true"></i>
-              </button>
-            )}
-  <div className="flex items-center">
-                  <i className="fa fa-building px-2 py-1 rounded-md bg-blue-600 text-gray-200"></i>
-                  <h1 className="font-bold text-gray-200 text-[15px] ml-3">Job Recruitment System</h1>
-                 
+              {window.innerWidth <= 768 && (
+                <button
+                  type="button"
+                  onClick={toggleSidebar}
+                  className="absolute top-4 right-2 z-50 inline-flex items-center p-2 text-sm text-gray-500 rounded-lg bg-white shadow-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                >
+                  <span className="sr-only">Close sidebar</span>
+                  <i className="fa fa-window-close ml-2" aria-hidden="true"></i>
+                </button>
+              )}
+              <div className="flex items-center">
+                <i className="fa fa-building px-2 py-1 rounded-md bg-blue-600 text-gray-200"></i>
+                <h1 className="font-bold text-gray-200 text-[15px] ml-3">Job Recruitment System</h1>
 
-                </div>
-</div>
+
+              </div>
+            </div>
 
             <ul className="sidebar-menu space-y-2 font-medium">
               <div className="text-gray-100 text-xl">
-              <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <div style={{ display: 'flex', flexDirection: 'column' }}>
 
-            
-           </div>
-               
+
+                </div>
+
                 <div className="my-2 bg-gray-600 h-[1px]"></div>
               </div>
               <li

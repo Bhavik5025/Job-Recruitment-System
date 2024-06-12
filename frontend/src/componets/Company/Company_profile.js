@@ -19,7 +19,7 @@ export default function Company_profile({visible}) {
         color: "#007bff"
     };
     const emailfield = {
-        marginLeft: "19px"
+      
     }
     useEffect(() => {
         axios.post("https://backend-testing-1rgv.onrender.com/company_details", {
@@ -129,30 +129,53 @@ export default function Company_profile({visible}) {
         }
       }
       
-    return (<><div className="card text-center" style={{ width: "800px", marginLeft: "260px", alignItems: "center", alignContent: "center", marginTop: "30px", fontFamily: "Poppins" }}>
-        <form onSubmit={btnclick}>
-            <div className="card-header" style={{ width: "800px", backgroundColor: "#007bff", color: "white" }}>
+    return (<> <div className="flex justify-center">
+        <div className="w-full lg:w-7/10">
+            <div className="card text-center mt-12 font-Poppins">
+                <form onSubmit={btnclick}>
+            <div className="card-header" style={{  backgroundColor: "#007bff", color: "white" }}>
                 Details
             </div>
-            <img src={image} className="card-img-top" alt="jell" style={{ width: "400px", height: "300px" }} />
+            <div className="flex justify-center">
+          
+            <img
+              src={image}
+              className="w-72  max-w-full h-auto cursor-pointer"
+              alt="..."
+            //   onClick={handleImageClick}
+            />
+         </div>
+
             <h5 className="card-header"><i class="fa fa-building-o" aria-hidden="true" style={iconstyle}></i>{user.Company_name}<i className="fa fa-building-o" aria-hidden="true" style={{
                 fontSize: "24px",
                 marginTop: "8px",
                 color: "#007bff", marginLeft: "10px"
             }} ></i></h5>
 
+<li className="list-group-item" style={{ margin: "10px", wordWrap: "break-word", maxWidth: "300px" }}>
+    <i className="fa fa-address-card" style={iconstyle} aria-hidden="true"></i>
+    Address: {user.Address}
+</li>
 
-            <li className="list-group-item" style={{ margin: "10px" }}><i class="fa fa-address-card" style={iconstyle} aria-hidden="true"></i>Address:-{user.Address}</li>
-            <hr></hr>
-            <li className="list-group-item" style={{ margin: "10px" }}><div className="input-div2" style={{ marginLeft: "189px" }}>
+<hr></hr>
+            {/* <li className="list-group-item" style={{ margin: "10px" }}><div className="flex flex-row" >
                 <i className="fa fa-file-text" aria-hidden="true" style={iconstyle}></i>
-                <div className="input-bx" style={emailfield}>
-                    <textarea type="text" required="required" onChange={DescriptionEnter} value={description} />
+                <div className="input-bx w-full" style={emailfield}>
+                    <textarea type="text" required="required" onChange={DescriptionEnter} value={description}  />
                     <span className="span-text">Description</span>
                 </div>
-            </div></li>
+            </div></li> */}
+            <div className="input-div2 flex items-center  w-full pr-5 pl-1">
+            <i className="fa fa-file-text ml-2 text-gray-500 text-xl" aria-hidden="true" style={iconstyle}></i>
+            <div className="ml-5 flex-grow relative">
+            <div className="input-bx w-full" style={emailfield}>
+                    <textarea type="text" required="required" onChange={DescriptionEnter} value={description}  />
+                    <span className="span-text">Description</span>
+                </div>
+            </div>
+        </div>
             <hr></hr>
-            <li className="list-group-item" style={{ margin: "10px" }}><div className="input-div" style={{ marginLeft: "189px" }}>
+            {/* <li className="list-group-item" style={{ margin: "10px" }}><div className="input-div" >
                 <i className="fa fa-upload" aria-hidden="true" style={iconstyle}></i>
 
                 <div className="mb-3"
@@ -161,45 +184,70 @@ export default function Company_profile({visible}) {
                     <input className="form-control" type="file" onChange={logoEnter} required />
                 </div>
 
-            </div></li>
+            </div></li> */}
+                    <div className="input-div2 flex items-center  w-full">
+            <i className="fa fa-upload ml-2 text-gray-500 text-xl" aria-hidden="true" style={iconstyle}></i>
+            <div className="ml-5 flex-grow relative">
+                <span className="block mb-1 text-gray-700">Upload Company's Logo</span>
+                <input className="input-bx" type="file" onChange={logoEnter} required />
+            </div>
+        </div>
             <hr />
-            <li className="list-group-item" style={{ margin: "10px" }}><div className="input-div" style={{ marginLeft: "189px" }}>
+            {/* <li className="list-group-item" style={{ margin: "10px" }}><div className="input-div">
                 <i className="fa fa-image" aria-hidden="true" style={iconstyle}></i>
 
                 <div className="mb-3"
-                    style={{ marginLeft: "20px", width: "370px", border: "1px solid #000000", borderRadius: "5px" }}>
-                    <span className="span-text" style={{ marginLeft: "10px", color: "#007bff" }}>Upload Company's Images</span>
+                   >
                     <input className="form-control" type="file" onChange={imagesEnter} required accept="image/*"
                         multiple />
                 </div>
 
-            </div></li>
+            </div></li> */}
+             <div className="input-div2 flex items-center  w-full">
+            <i className="fa fa-image ml-2 text-gray-500 text-xl" aria-hidden="true" style={iconstyle}></i>
+            <div className="ml-5 flex-grow relative">
+                <span className="block mb-1 text-gray-700">Upload Company's Images</span>
+                <input className="input-bx" type="file" onChange={imagesEnter} required accept="image/*"
+                        multiple />
+            </div>
+        </div>
 
-            <li className="list-group-item" style={{ margin: "10px" }}><div className="input-div2" style={{ marginLeft: "189px" }}>
+            <li className="list-group-item" style={{ margin: "10px" }}><div className="input-div2" >
                 <i className="fa fa-clock-o" aria-hidden="true" style={iconstyle}></i>
                 <h5 style={{marginTop:"10px"}}>Opening time</h5>
-                <div className="input-bx" style={emailfield}>
+                <div className="input-bx ml-3" style={emailfield}>
                     <input type="time" required="required" onChange={openEnter} value={openingtime} />
                     
                 </div>
             </div></li>
             <hr></hr>
 
-            <li className="list-group-item" style={{ margin: "10px" }}><div className="input-div2" style={{ marginLeft: "189px" }}>
+            <li className="list-group-item" style={{ margin: "10px" }}><div className="input-div2" >
                 <i className="fa fa-clock-o" aria-hidden="true" style={iconstyle}></i>
                 <h5 style={{marginTop:"10px"}}>Closing time</h5>
-                <div className="input-bx" style={{marginLeft:"30px"}}>
+                <div className="input-bx ml-5">
                     <input type="time" required="required" onChange={closeEnter} value={closingtime} />
                     
                 </div>
             </div></li>
             <hr></hr>
-            <li className="list-group-item" style={{ margin: "10px" }}><div className="input-div2" style={{ marginLeft: "320px" }}>
-            <div className="d-flex justify-content-center">
-                <button type="submit" className="centered-button" style={{ marginTop: "20px", fontFamily: "Poppins" }}>{loading==true?"Loading...":"Save"}</button>
-            </div>
-            </div></li>
+            <li className="list-group-item flex justify-center" style={{ margin: "10px" }}>
+    <div className="">
+        <div className="flex justify-center">
+            <button
+                type="submit"
+                className="centered-button"
+                style={{ marginTop: "20px", fontFamily: "Poppins" }}
+            >
+                {loading ? "Loading..." : "Save"}
+            </button>
+        </div>
+    </div>
+</li>
+
 
         </form>
+    </div>
+    </div>
     </div></>)
 }

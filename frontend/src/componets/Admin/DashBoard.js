@@ -27,7 +27,7 @@ export default function DeshBoard()
     <div className="flex flex-col lg:flex-row h-auto">
   <SideBar sendSelectedFieldToParent={handleSelectedField} className="lg:w-1/3" />
   <div className="w-full lg:w-1/12"></div> {/* Spacer */}
-  <div className="flex-grow lg:ml-10 lg:w-8/12"> {/* Use margin left for space on larger screens */}
+  <div className="flex-grow lg:ml-10 lg:w-full"> {/* Use margin left for space on larger screens */}
     {selectedField === "Dashboard" ? <Verified_Company /> : <Company_List />}
   </div>
 </div>

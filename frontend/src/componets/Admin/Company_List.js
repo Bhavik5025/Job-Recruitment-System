@@ -4,17 +4,17 @@ import Unverified_Company from "./Unverified_Companies";
 
 export default function Company_List() {
   const [user, setUserData] = useState({ Data: [] });
-  const [loading, setLoading] = useState(true); // Step 1: Add loading state
+  const [loading, setLoading] = useState(true); // Add loading state
 
   useEffect(() => {
     axios.get("https://backend-testing-1rgv.onrender.com/company_data")
       .then((response) => {
         setUserData(response.data);
-        setLoading(false); // Step 3: Set loading to false after data is fetched
+        setLoading(false); // Set loading to false after data is fetched
       })
       .catch((error) => {
         console.error('Error fetching user data:', error);
-        setLoading(false); // Step 3: Set loading to false if there's an error
+        setLoading(false); // Set loading to false if there's an error
       });
   }, []);
 
@@ -23,9 +23,9 @@ export default function Company_List() {
 
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="mt-10 sm:mt-23">
-        <h1 className="text-2xl font-bold mb-4 sm:mb-8 " style={{ fontFamily: "Poppins" }}>Company List</h1>
-        {loading ? ( // Step 4: Show loading indicator if loading is true
+      <div className="mt-10 sm:mt-23 w-full">
+        <h1 className="text-2xl font-bold mb-4 sm:mb-8" style={{ fontFamily: "Poppins" }}>Company List</h1>
+        {loading ? ( // Show loading indicator if loading is true
           <div className="flex justify-center items-center">
             <p>Loading...</p>
           </div>
