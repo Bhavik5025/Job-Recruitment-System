@@ -20,7 +20,7 @@ export default function Login_Form_Controler() {
       };
 
     return (<>
-    <div className="h-300 ">
+    <div className="h-auto justify-center">
         {selection=="login"?<Job_Seeker_Login_Componenet select = {setSelection}/>:<Job_Seeker_Registration sendData={handleChildData} />}
         <div style={{marginTop:"10px",marginBottom:"20px"}}>
                {selection=="login"?<p className="text-center text-muted mt-5 mb-0 ml-12">If you are new user? Register Here For <a

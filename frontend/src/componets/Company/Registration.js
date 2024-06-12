@@ -118,7 +118,7 @@ export default function Registration({sendData}) {
     return (<>
  <div className="mt-20"></div>
 <div className="h-screen sm:mt-20 md:mt-10 lg:mt-0 overflow-y-auto">
-    <label className="parent_label mt-10 sm:mt-20 md:mt-10 lg:mt-0 text-xl font-semibold">Sign Up</label>
+    <label className="parent_label mt-10 sm:mt-20 md:mt-10 lg:mt-0 text-xl font-semibold flex justify-center  ml-10">Sign Up</label>
     <form onSubmit={btnClk} className="w-full max-w-md mx-auto">
         <div className="input-div flex items-center mt-5 w-full">
             <i className="fa fa-building-o text-gray-500 text-xl" aria-hidden="true" style={iconstyle}></i>
