@@ -5,9 +5,9 @@ export default function Vacancy_view(props) {
     var [company, setCompanyData] = useState();
     var [images, setImages] = useState([]);
     var [status, setStatus] = useState(false);
-    var [vacancy,setVacancies]=useState(props.number_of_places);
-    var [vacancy1,setVacancies1]=useState(props.number_of_places);
-    
+    var [vacancy, setVacancies] = useState(props.number_of_places);
+    var [vacancy1, setVacancies1] = useState(props.number_of_places);
+
     useEffect(() => {
         console.log(props.Experience)
         axios.post("https://backend-testing-1rgv.onrender.com/company_dashboard_data", {
@@ -56,15 +56,14 @@ export default function Vacancy_view(props) {
         }).catch((error) => {
             console.log(error)
         });
-        axios.post("https://backend-testing-1rgv.onrender.com/vacancy_Request_details_For_Jobber",{
-            email:window.localStorage.getItem("email"),
-            Approve:"true"
-        }).then((data)=>{
+        axios.post("https://backend-testing-1rgv.onrender.com/vacancy_Request_details_For_Jobber", {
+            email: window.localStorage.getItem("email"),
+            Approve: "true"
+        }).then((data) => {
             console.log(data.data.data)
-            if(data.data.data.length!=0)
-            {
-                setStatus(true);  
-        
+            if (data.data.data.length != 0) {
+                setStatus(true);
+
             }
         }
 
@@ -86,8 +85,7 @@ export default function Vacancy_view(props) {
             console.log(error);
         })
     }
-    function vacancy_Update(event)
-    {
+    function vacancy_Update(event) {
         setVacancies(event.target.value);
     }
     const emailfield = {
@@ -99,103 +97,124 @@ export default function Vacancy_view(props) {
         marginTop: "8px",
         color: "#007bff"
     };
-    function updateBtn()
-    {
-        axios.post("https://backend-testing-1rgv.onrender.com/vacancy_update",{
-            email:props.email,
-            jdescription:props.description,
-            Experience:props.Experience,
-            qualification:props.qualification,
-            vacancies:vacancy
-        }).then((data)=>{
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [selectedImage, setSelectedImage] = useState(null);
+
+    const openModal = (image) => {
+        setSelectedImage(image);
+        setIsModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+    };
+    function updateBtn() {
+        axios.post("https://backend-testing-1rgv.onrender.com/vacancy_update", {
+            email: props.email,
+            jdescription: props.description,
+            Experience: props.Experience,
+            qualification: props.qualification,
+            vacancies: vacancy
+        }).then((data) => {
             console.log(data)
-            if(data.data.data=="success")
-            {
+            if (data.data.data == "success") {
                 alert("Vacancy Update SuccessFully")
-             setVacancies1(vacancy)
+                setVacancies1(vacancy)
             }
-        }).catch((error)=>{
+        }).catch((error) => {
             console.log(error)
         })
     }
     const mid = Math.ceil(images.length / 2);
     const leftColumn = images.slice(0, mid);
     const rightColumn = images.slice(mid);
-    return (<>{data ?
-        <section className="h-100 gradient-custom-2" style={{ marginLeft: props.mright, marginTop: "20px" }}>
-            
-            <div className="card" style={{ width: "700px" }}>
-                <div className="rounded-top text-white d-flex flex-row" style={{ backgroundColor: "#007bff", height: "200px" }}>
-                    <div className="ms-4 mt-5 d-flex flex-column" style={{ width: "150px" }}>
-                        <img src={data.logo}
-                            alt="Generic placeholder image" className="img-fluid img-thumbnail mt-4 mb-2"
-                            style={{ width: "150px", zIndex: "1" }} />
+    return (<>
+        {data ?
+            <section className="h-100 gradient-custom-2" style={{ marginLeft: props.mright, marginTop: "20px" }}>
 
-                    </div>
-                    <div className="ms-3" style={{ marginTop: "130px" }}>
-                        {company ? <h5>{company.Company_name}</h5> : null}
+                <div className="card">
+                    <div className="rounded-top text-white d-flex flex-row" style={{ backgroundColor: "#007bff", height: "200px" }}>
+                        <div className="ms-4 mt-5 d-flex flex-column" style={{ width: "150px" }}>
+                            <img src={data.logo} onClick={() => openModal(data.logo)}
+                                alt="Generic placeholder image" className="img-fluid img-thumbnail mt-4 mb-2"
+                                style={{ width: "150px", zIndex: "1" }} />
 
-                    </div>
-                </div>
-                <div className="card-body p-4 text-black">
-                    <div className="mb-5">
-                        <p className="lead fw-normal mb-1">Job Description</p>
-                        <div className="p-4" style={{ backgroundColor: "#f8f9fa" }}>
-                            <p className="font-italic mb-1">{props.description}</p>
-                            <p className="font-italic mb-1"><i class="fa fa-asterisk" aria-hidden="true"></i><b>Field:-{props.Field}</b></p>
-                            <p className="font-italic mb-1"><i class="fa fa-asterisk" aria-hidden="true"></i><b>Number Of Vacancies:-{vacancy1}</b></p>
-                            <p className="font-italic mb-1"><i class="fa fa-asterisk" aria-hidden="true"></i><b>Package:-{props.package} <i class="fa fa-inr" aria-hidden="true"></i> </b></p>
+                        </div>
+                        <div className="ms-3" style={{ marginTop: "130px" }}>
+                            {company ? <h5>{company.Company_name}</h5> : null}
 
                         </div>
                     </div>
-                    {props.show == "false" ?
+                    <hr></hr>
+                    <div className="card-body p-4 text-black">
                         <div className="mb-5">
-                            <p className="lead fw-normal mb-1">About Company</p>
+                            <p className="lead fw-normal mb-1 ml-0">Description</p>
                             <div className="p-4" style={{ backgroundColor: "#f8f9fa" }}>
-                                {data ? <>
-
-                                    <p className="font-italic mb-1"><i class="fa fa-asterisk" aria-hidden="true"></i>{data.description}</p>
-                                    <p className="font-italic mb-1"><i class="fa fa-envelope" aria-hidden="true"></i>{props.email}</p>
-                                    {company ? <p className="font-italic mb-1"><i class="fa fa-phone" aria-hidden="true"></i>{company.Mobile_no}</p> : null}
-                                    
-                                    {company ? <p className="font-italic mb-1"><i class="fa fa-building" aria-hidden="true"></i>{company.Address}</p> : null}
-                                    <p className="font-italic mb-1"><i class="fa fa-clock-o" aria-hidden="true"></i>Opening Time:-{data.opening_time}<i class="fa fa-clock-o" aria-hidden="true" style={{ marginLeft: "40px" }}></i>Closing Time:-{data.closing_time}</p>
-                                    <div className="d-flex justify-content-between align-items-center mb-4">
-
-                                        <p className="lead fw-normal mb-0" style={{ marginTop: "10px" }}>photos</p>
-
-                                    </div>
-                                    <div className="row g-2">
-                                        <div class="col mb-2">
-                                            {leftColumn.map((image, index) => (
-                                                <img key={index} src={image} alt={`Image ${index}`} className="w-100 rounded-3" style={{ height: "200px", margin: "10px" }} />
-                                            ))}
-                                        </div>
-                                        <div className="col mb-2">
-                                            {rightColumn.map((image, index) => (
-                                                <img key={index} src={image} alt={`Image ${index}`} className="w-100 rounded-3" style={{ height: "200px", margin: "10px" }} />
-                                            ))}
-                                        </div>
-                                    </div>
-                                </> : null}
+                                <p className="font-italic mb-1">{props.description}</p>
+                                <p className="font-italic mb-1"><i class="fa fa-asterisk" aria-hidden="true"></i><b>Field:-{props.Field}</b></p>
+                                <p className="font-italic mb-1"><i class="fa fa-asterisk" aria-hidden="true"></i><b>Number Of Vacancies:-{vacancy1}</b></p>
+                                <p className="font-italic mb-1"><i class="fa fa-asterisk" aria-hidden="true"></i><b>Package:-{props.package} <i class="fa fa-inr" aria-hidden="true"></i> </b></p>
 
                             </div>
-                            {props.show == "false" ? status == true ? <button className="centered-button" onClick={applyclick} style={{ textAlign: "center", marginLeft: "250px", marginTop: "10px" }} disabled>Applied</button> : <button className="centered-button" onClick={applyclick} style={{ textAlign: "center", marginLeft: "250px", marginTop: "10px" }} >Apply</button>
-                                : null}
+                        </div>
+                        {props.show == "false" ?
+                            <div className="mb-5">
+                                <p className="lead fw-normal mb-1">About Company</p>
+                                <div className="p-4" style={{ backgroundColor: "#f8f9fa" }}>
+                                    {data ? <>
 
-                        </div> : <div className="input-div3">
-                            <i className="fa fa-edit" aria-hidden="true" style={iconstyle1}></i>
-                            <div className="input-bx" style={emailfield}>
-                                <input type="number" required="required" onChange={vacancy_Update} value={vacancy}  />
-                                <span className="span-text">Number of Vacancy</span>
+                                        <p className="font-italic mb-1"><i class="fa fa-asterisk" aria-hidden="true"></i>{data.description}</p>
+                                        <p className="font-italic mb-1"><i class="fa fa-envelope" aria-hidden="true"></i>{props.email}</p>
+                                        {company ? <p className="font-italic mb-1"><i class="fa fa-phone" aria-hidden="true"></i>{company.Mobile_no}</p> : null}
+
+                                        {company ? <p className="font-italic mb-1"><i class="fa fa-building" aria-hidden="true"></i>{company.Address}</p> : null}
+                                        <p className="font-italic mb-1"><i class="fa fa-clock-o" aria-hidden="true"></i>Opening Time:-{data.opening_time}<i class="fa fa-clock-o" aria-hidden="true" style={{ marginLeft: "40px" }}></i>Closing Time:-{data.closing_time}</p>
+                                        <div className="d-flex justify-content-between align-items-center mb-4">
+
+                                            <p className="lead fw-normal mb-0" style={{ marginTop: "10px" }}>photos</p>
+
+                                        </div>
+                                        <div className="row g-2">
+                                            <div class="col mb-2">
+                                                {leftColumn.map((image, index) => (
+                                                    <img key={index} src={image} alt={`Image ${index}`} className="w-100 rounded-3" style={{ height: "200px", margin: "10px" }} />
+                                                ))}
+                                            </div>
+                                            <div className="col mb-2">
+                                                {rightColumn.map((image, index) => (
+                                                    <img key={index} src={image} alt={`Image ${index}`} className="w-100 rounded-3" style={{ height: "200px", margin: "10px" }} />
+                                                ))}
+                                            </div>
+                                        </div>
+                                    </> : null}
+
+                                </div>
+                                {props.show == "false" ? status == true ? <button className="centered-button" onClick={applyclick} style={{ textAlign: "center", marginTop: "10px" }} disabled>Applied</button> : <button className="centered-button" onClick={applyclick} style={{ textAlign: "center", marginTop: "10px" }} >Apply</button>
+                                    : null}
+
+                            </div> : <div className="flex flex-col lg:flex-row items-center">
+                               <div className="flex flex-row"><i className="fa fa-edit" aria-hidden="true" style={iconstyle1}></i>
+                                <div className="input-bx" style={emailfield}>
+                                    <input type="number" required="required" onChange={vacancy_Update} value={vacancy} className="p-2 border rounded" />
+                                    <span className="span-text">Number of Vacancy</span>
+                                </div></div> 
+                                <button className="centered-button mt-2 lg:mt-0 lg:ml-2 p-2 bg-blue-500 text-white rounded" onClick={updateBtn}>Update</button>
                             </div>
-                            <button className="centered-button" style={{marginLeft:"10px"}} onClick={updateBtn}>Update</button>
-                        </div>}
-                    {/* </div>
-              </div>
-              </div> */}
+                        }
+
+                    </div>
                 </div>
-            </div>
-        </section> : null}
+                {isModalOpen && (
+                    <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50" onClick={closeModal}>
+                        <div className="relative">
+                            <img src={selectedImage} alt="Zoomed" className="rounded-3xl object-cover" style={{ maxHeight: "80vh", maxWidth: "80vw" }} />
+                            <button onClick={closeModal} className="absolute top-2 right-2 text-white text-2xl">&times;</button>
+                        </div>
+                    </div>
+                )}
+            </section>
+            : null}
+
+
     </>)
 }

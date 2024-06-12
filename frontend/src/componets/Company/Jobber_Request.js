@@ -37,15 +37,28 @@ export default function Jobber_Request() {
         }
             },[update])
     return (<>
-        <div style={{ width: "900px", marginLeft: "270px",marginTop:"20px"}}>
-            <label className="parent_label" style={{ marginLeft: "0px" }}>Job Requests</label>
-        {j_data.length==0?<NotFound data="no job Request Found at the moment"/>:null}
-        {j_data
-        ? j_data.map((obj, index) => (
-            <div key={index}><Jobber_details Approve={obj.Approve} description={obj.Job_description} jemail={obj.Jobber_email} senddata={handler}></Jobber_details></div>
-          ))
-        : null}
-       
-          </div>
+<div className=" mx-auto mt-8">
+      <div className="flex justify-center">
+        <div className="w-full max-w-4xl">
+        <label className="parent_label text-2xl font-bold mb-4 ml-20 lg:ml-0 md:ml-0" style={{ fontFamily: "Poppins" }}>
+            Job Requests
+          </label>
+          {j_data.length === 0 ? (
+            <NotFound data="No job request found at the moment" />
+          ) : (
+            j_data.map((obj, index) => (
+              <div key={index} className="mb-4">
+                <Jobber_details
+                  Approve={obj.Approve}
+                  description={obj.Job_description}
+                  jemail={obj.Jobber_email}
+                  senddata={handler}
+                />
+              </div>
+            ))
+          )}
+        </div>
+      </div>
+    </div>
     </>)
 }

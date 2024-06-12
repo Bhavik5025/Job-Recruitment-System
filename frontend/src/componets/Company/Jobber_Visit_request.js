@@ -40,13 +40,18 @@ export default function Jobber_Visit_Request() {
     setRefresh(true);
   }
   return (<>
-    <div style={{ width: "900px", marginLeft: "270px",marginTop:"20px"}}>
-            <label className="parent_label" style={{ marginLeft: "0px" }}>Visit Requests</label>
+    <div className=" mx-auto mt-8">
+      <div className="flex justify-center">
+        <div className="w-full max-w-4xl">
+    <label className="parent_label text-2xl font-bold mb-4 ml-20 lg:ml-0 md:ml-0" style={{ fontFamily: "Poppins" }}>
+    Visit Requests</label>
             {rdata.length === 0 ? <NotFound data="No visit requests are available at the moment." /> : null}
 
             {rdata ? rdata.map((obj, index) => (
         <Visitor_details email={obj.Jobber_email} date={obj.Date} time={obj.Time} datahandler={setresponsedata}/>
     )):null}
+    </div>
+    </div>
     </div>
     </>) ;
 }

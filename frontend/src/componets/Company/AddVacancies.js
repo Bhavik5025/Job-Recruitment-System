@@ -23,7 +23,7 @@ export default function AddVacancies()
     },[])
     
     return(<>
-    {status==true?<Vacancies/>:<div style={{marginTop:"60px",marginLeft:"260px"}}><NotFound data="Please Enter Dashboard details first and then you are eligible to add Vacancies" /></div>}
+    {status==true?<Vacancies/>:<div style={{marginTop:"60px"}}><NotFound data="Please Enter Dashboard details first and then you are eligible to add Vacancies" /></div>}
     
     </>)
 }
