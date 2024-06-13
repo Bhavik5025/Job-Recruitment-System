@@ -23,6 +23,16 @@
 .span-text {
   @apply absolute left-0 p-2 text-sm text-blue-500 uppercase pointer-events-none transition-all;
 }
+/* Ensure the placeholder text wraps within the defined width */
+input::placeholder {
+  white-space: pre-wrap; /* Allows placeholder text to wrap */
+}
+
+/* Optional: If you want to control the placeholder styling */
+input::placeholder {
+  color: #6c757d;
+  font-size: 0.875rem; /* Adjust the size as needed */
+}
 
 body {
   display: flex;
