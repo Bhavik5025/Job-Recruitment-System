@@ -7,6 +7,8 @@ export default function Job_Seeker_Login_Componenet()
     var [email, setEmail] = useState('');
     var [password, setPassword] = useState('');
     const history=useNavigate();
+    const [loading, setLoading] = useState(false);
+
     const emailfield = {
      
     }
@@ -36,6 +38,7 @@ export default function Job_Seeker_Login_Componenet()
     function btnclick(event)
     {
         event.preventDefault();
+        setLoading(true);
         console.log(email);
         console.log(password);
         try {
@@ -57,6 +60,8 @@ export default function Job_Seeker_Login_Componenet()
                 }
             }).catch((error)=>{
                 console.log(error);
+            }).finally(()=>{
+                setLoading(false);
             })
         } catch (error) {
             alert(error);
@@ -81,8 +86,8 @@ export default function Job_Seeker_Login_Componenet()
             </div>
         </div>
         <div className="d-flex justify-content-center">
-            <button type="submit" className="centered-button  ml-10" style={{ marginTop: "20px", fontFamily: "Poppins" }}>Log In</button>
-        </div>
+            <button type="submit" disabled={loading} className="centered-button ml-10" style={{ marginTop: "20px", fontFamily: "Poppins" }}>{loading ? 'Loading...' : 'Login'}</button>
+            </div>
 
     </form>
 

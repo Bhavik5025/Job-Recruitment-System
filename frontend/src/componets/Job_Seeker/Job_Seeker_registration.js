@@ -225,7 +225,7 @@ export default function Job_Seeker_Registration({ sendData }) {
             <div className="input-div flex items-center  w-full">
                 <i className="fa fa-upload text-gray-500 text-xl" aria-hidden="true" style={iconstyle}></i>
                 <div className="ml-5 flex-grow relative">
-                    <span className="block mb-1 text-gray-700">Upload Company's Certificate</span>
+                    <span className="block mb-1 text-gray-700">Upload Your Passport Size Image</span>
                     <input className="form-control w-full border border-black rounded-md py-2 px-4" type="file" onChange={ImageEnter} required />
                 </div>
             </div>
@@ -242,7 +242,7 @@ export default function Job_Seeker_Registration({ sendData }) {
              <div className="input-div flex items-center  w-full">
             <i className="fa fa-upload text-gray-500 text-xl" aria-hidden="true" style={iconstyle}></i>
             <div className="ml-5 flex-grow relative">
-                <span className="block mb-1 text-gray-700">Upload Company's Certificate</span>
+                <span className="block mb-1 text-gray-700">Upload Your Resume</span>
                 <input className="form-control w-full border border-black rounded-md py-2 px-4" type="file" onChange={ResumeEnter} required />
             </div>
         </div>
