@@ -60,6 +60,7 @@ export default function Vacancy_view(props) {
             email: window.localStorage.getItem("email"),
             Approve: "true"
         }).then((data) => {
+            console.log("hekk");
             console.log(data.data.data)
             if (data.data.data.length != 0) {
                 setStatus(true);
@@ -129,6 +130,7 @@ export default function Vacancy_view(props) {
     const leftColumn = images.slice(0, mid);
     const rightColumn = images.slice(mid);
     return (<>
+    
         {data ?
             <section className="h-100 gradient-custom-2" style={{ marginLeft: props.mright, marginTop: "20px" }}>
 
@@ -214,7 +216,6 @@ export default function Vacancy_view(props) {
                 )}
             </section>
             : null}
-
 
     </>)
 }
