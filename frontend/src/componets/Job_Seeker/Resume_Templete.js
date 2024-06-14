@@ -1,14 +1,22 @@
 import axios from "axios";
 import React, { useEffect,useState } from "react";
-import html2canvas from 'html2canvas';
+
 import jsPDF from "jspdf";
 import domtoimage from 'dom-to-image';
-
-
-
+import { ReactComponent as PhoneIcon } from "../icons/phone.svg";
+import { ReactComponent as EnvelopeIcon } from "../icons/envelope.svg";
+import { ReactComponent as CircleIcon } from "../icons/circle.svg";
+import { ReactComponent as BuildingIcon } from "../icons/building.svg";
+import { ReactComponent as MapMarkerIcon } from "../icons/map-marker.svg";
+import { ReactComponent as UniversityIcon } from "../icons/university.svg";
+import { ReactComponent as GraduationCapIcon } from "../icons/graduationcap.svg";
+import { ReactComponent as CertificateIcon } from "../icons/certificate.svg";
+import { ReactComponent as FutbolIcon } from "../icons/futball.svg";
+import Loading from "../Lottie/Loading";
 export default function ResumeTemplete(props)
 {
     var [data,setData]=useState();
+    const [loading, setLoading] = useState(true);
     
   const [imageLoaded, setImageLoaded] = useState(false);
     useEffect(()=>{
@@ -21,9 +29,11 @@ export default function ResumeTemplete(props)
                 })
                 console.log(props.user.image);
             }
+            setLoading(false);
          
         }).catch((error)=>{
             console.log(error);
+            setLoading(false);
         })
     },[]);
      function handleImageLoad() {
@@ -36,24 +46,21 @@ export default function ResumeTemplete(props)
       function generatePDF() {
         const contentToPrint = document.getElementById("di");
       
-        // Use domtoimage to capture the content and convert it to a canvas
         domtoimage
-          .toPng(contentToPrint)
+          .toPng(contentToPrint, { bgcolor: '#ffffff' }) 
           .then((dataUrl) => {
-            // Create a canvas element and set its dimensions
             const canvas = document.createElement("canvas");
             const context = canvas.getContext("2d");
             canvas.width = contentToPrint.clientWidth;
             canvas.height = contentToPrint.clientHeight;
       
-            // Create an image object and draw the data URL onto the canvas
             const img = new Image();
             img.src = dataUrl;
             img.onload = function () {
               context.drawImage(img, 0, 0, canvas.width, canvas.height);
       
               // Create a PDF document
-              const pdf = new jsPDF("p", "mm", "a2");
+              const pdf = new jsPDF("p", "mm", "a4"); // A4 size
               const width = pdf.internal.pageSize.getWidth();
               const height = (canvas.height * width) / canvas.width;
       
@@ -71,105 +78,109 @@ export default function ResumeTemplete(props)
       
     
     return(<>
-        <div style={{marginLeft:props.mleft }}>
-        <div class="resume-main"  id="di">
-            <div class="left-box">
-                <br/><br/>
-                <div class="profile">
-                    <img src={props.user.image} />
-                </div>
-                <div class="content-box">
-                <h2>Profile Info</h2>
-                <hr class="hr1"/>
-                {data?<p class="p1">{data.objective}</p>:null}
-                
-             
-		<h3><i class="fa fa-envelope" aria-hidden="true"></i>{props.user.Email}</h3>
-		<h3><i class="fa fa-phone" aria-hidden="true"></i>{props.user.Mobile_no}</h3>
-		
-                <br/><br/>
-                <h2>My Skills</h2>
-                <hr class="hr1"/>
-                <br/>
-                {data?data.skill.map((skill, index) => (
-    <>
-    <div class="clearfix"></div>
-    <div class="col-div-6"><p class="p2" key={index}>{skill} </p></div>
-    <div class="col-div-6">
-                    <i class="fa fa-circle circle"></i>
-                    <i class="fa fa-circle circle"></i>
-                    <i class="fa fa-circle circle"></i>
+       
+    {props.type !== "company" && (
+    <div className="flex justify-end mt-2 sm:mt-0 mb-0" style={{ width: '100%' }}>
+      <button className="pl-4 pr-2 pt-2 pb-2 bg-blue-500 text-white rounded-lg" onClick={generatePDF}>
+      <i class="fa fa-download" aria-hidden="true"></i>
+      </button>
+    </div>
+  )}
+  <div className="flex flex-col items-center min-h-screen">
+  {loading ? (
+         <Loading/>
+        ) : (
+          <div className="flex justify-center items-center w-full">
+            <div className="resume-container w-full sm:w-10/12 md:w-9/12 lg:w-9/12 xl:w-6/12 bg-white rounded-lg p-8" style={{ fontFamily: 'Poppins, sans-serif', maxWidth: '210mm', maxHeight: '297mm', paddingBottom: '20px' }}>
+              <div className="flex flex-col md:flex-row" id="di">
+                <div className="left-box w-full md:w-1/2 p-4" style={{ minWidth: "300px" }}>
+                  <div className="profile flex justify-center mb-4">
+                    <div className="w-32 h-32 overflow-hidden">
+                      <img src={props.user.image} alt="Profile" className="w-full h-full object-cover" />
                     </div>
-    </>
-  )):null}
-               
-                    
-                
-              
-        
-                    <div class="clearfix"></div>
-                    
+                  </div>
+                  <div className="content-box">
+                    <h2 className="text-xl font-semibold">Profile Info</h2>
+                    <hr className="my-2" />
+                    {data && <p className="text-gray-700">{data.objective}</p>}
+                    <h3 className="mt-4 text-lg flex items-center">
+                      <EnvelopeIcon className="mr-2 mt-1" style={{ width: "15px", height: "14px" }} /> {props.user.Email}
+                    </h3>
+                    <h3 className="text-lg flex items-center">
+                      <PhoneIcon className="mr-2 mt-1" style={{ width: "18px", height: "16px" }} /> {props.user.Mobile_no}
+                    </h3>
+                    <h2 className="text-xl font-semibold mt-6">My Skills</h2>
+                    <hr className="my-2" />
+                    {data && data.skill.map((skill, index) => (
+                      <div className="flex items-center my-2" key={index}>
+                        <div className="w-1/2 text-gray-700">{skill}</div>
+                        <div className="w-1/2 flex">
+                          <CircleIcon className="mr-2" />
+                          <CircleIcon className="mr-2" />
+                          <CircleIcon className="mr-2" />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-            </div>
-        
-            <div class="right-box">
-                <h1>
-                    {props.user.Name}
-                </h1>
-                <p class="p3">{data?data.Field:null}</p>
-        
-                <br/>	
-                <h2 class="heading">Work Experience</h2>
-                <hr class="hr2"/>
-                <br/>
-                {props.user.Experience=="0"?<div class="col-div-4">
-                    <p class="p5">Fresher</p>
-                   
-                </div>:<><div class="col-div-4">
-                    <p class="p5">{data?data.Starting_date:null}</p>
-                    
-                    <p class="p5" style={{marginLeft:"35px"}}>To</p>
-                    
-                    <p class="p5">{data?data.Ending_date:null}</p>
-                    <span class="span1"><i class="fa fa-building-o" aria-hidden="true"></i>{data?data.Description:null}</span>
-                </div>
-                  <div class="col-div-8">
-                  <p class="p5">{data?data.title:null}</p>
-                  <span class="span1"><i class="fa fa-map-marker" aria-hidden="true"></i>{data?data.working_location:null}</span>
-              </div></>
-                }
-                
-                <div class="clearfix"></div>
-        
-                <br/>	
-                <h2 class="heading">My Education</h2>
-                <hr class="hr2"/>
-                <br/>
-                <div class="col-div-4">
-                    <p class="p5">{data?data.GraduationYear:null}</p>
-                    <span class="span1"><i class="fa fa-university" aria-hidden="true"></i>{data?data.college:null}</span>
-                </div>
-                <div class="col-div-8">
-                    <p class="p5"><i class="fa fa-graduation-cap" aria-hidden="true"></i>{props.user.Field}</p>
-                    <span class="span1"><i class="fa fa-certificate" aria-hidden="true"></i>Cpi:-{data?data.cpi:null}</span>
-                </div>
-                <div class="clearfix"></div>
-                <br/>
-             
-              <div className="clearfix"></div>
-              <h2 style={{marginTop:"20px"}} className="heading">Hobbies</h2>
-                    <hr />
-                  
-                    <div class="col-div-3 col3">
-                        <i class="fa fa-futbol-o in"></i>
-                      {data?<span >{data.hobbies}</span>:null}  
+                <div className="right-box w-full md:w-1/2 p-4" style={{ minWidth: "350px" }}>
+                  <h1 className="text-3xl font-bold">{props.user.Name}</h1>
+                  <p className="text-lg text-gray-700 mb-10">{data ? data.Field : null}</p>
+                  <h2 className="text-xl font-semibold mt-6">Work Experience</h2>
+                  <hr className="my-2" />
+                  {props.user.Experience === "0" ? (
+                    <div className="my-2">
+                      <p className="text-gray-700">Fresher</p>
                     </div>
-                <div class="clearfix"></div>
+                  ) : (
+                    <>
+                      <div className="my-2 flex items-center">
+                        <p className="text-gray-700">{data ? data.Starting_date : null}</p>
+                        <p className="text-gray-700 mx-2">To</p>
+                        <p className="text-gray-700">{data ? data.Ending_date : null}</p>
+                      </div>
+                      <span className="text-gray-700 flex items-center">
+                        <BuildingIcon className="mr-2 mt-1" style={{ width: "15px", height: "14px" }} /><label>{data ? data.Description : null}</label>
+                      </span>
+                      <div className="my-2">
+                        <p className="text-gray-700">{data ? data.title : null}</p>
+                        <span className="text-gray-700 flex items-center">
+                          <MapMarkerIcon className="mr-2 mt-1" style={{ width: "18px", height: "18px" }} /> {data ? data.working_location : null}
+                        </span>
+                      </div>
+                    </>
+                  )}
+                  <h2 className="text-xl font-semibold mt-6">My Education</h2>
+                  <hr className="my-2" />
+                  <div className="my-2 flex items-center">
+                    <div className="flex flex-col">
+                      <p className="text-gray-700">{data ? data.GraduationYear : null}</p>
+                    </div>
+                  </div>
+                  <div className="my-2 flex items-center">
+                    <UniversityIcon className="mr-2" style={{ width: "18px", height: "18px" }} />
+                    <div className="flex flex-col">
+                      <span className="text-gray-700">{data ? data.college : null}</span>
+                    </div>
+                  </div>
+                  <div className="my-2 flex items-center">
+                    <GraduationCapIcon className="mr-2" style={{ width: "18px", height: "18px" }} /> {props.user.Field}
+                  </div>
+                  <div className="my-2 flex items-center">
+                    <CertificateIcon className="mr-2" style={{ width: "18px", height: "18px" }} /> Cpi:-{data ? data.cpi : null}
+                  </div>
+                  <h2 className="text-xl font-semibold mt-10">Hobbies</h2>
+                  <hr />
+                  <div className="my-2 flex items-center">
+                    <FutbolIcon className="mr-2" style={{ width: "18px", height: "18px" }} /> {data && <span>{data.hobbies}</span>}
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="clearfix"></div>
-        
-        </div>
-        </div>
-      {props.type!="company"? <button className="centered-button" style={{marginLeft:"600px",marginTop:"20px",marginBottom:"20px"}} onClick={generatePDF}>Download</button>
-     :null}    </>);
+          </div>
+        )}
+
+</div>
+
+        </>);
 }

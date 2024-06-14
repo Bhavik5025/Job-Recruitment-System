@@ -216,7 +216,7 @@ export default function Job_Seeker_SideBar()
                       }`}
                     style={{ fontFamily: 'Poppins' }}
                   >
-                    Appliers
+                  Available Vacancies
                   </span>
                 </div>
               </li>
