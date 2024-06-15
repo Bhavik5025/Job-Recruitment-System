@@ -270,7 +270,7 @@ export default function Company_view(props) {
                           disabled={loading} // Disable the button while loading
                         >
                           {loading2 ? (
-                            <Loading/> // Replace with a spinner or loading indicator
+                            'Loading...' // Replace with a spinner or loading indicator
                           ) : (
                             'Apply'
                           )}
