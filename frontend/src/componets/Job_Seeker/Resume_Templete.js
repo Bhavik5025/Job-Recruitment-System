@@ -44,6 +44,10 @@ export default function ResumeTemplete(props)
   
     
       function generatePDF() {
+        if (window.innerWidth <= 768) { // Assuming 768px is the threshold for mobile screens
+          alert("Please open on a computer screen to generate the PDF.");
+          return;
+        }
         const contentToPrint = document.getElementById("di");
       
         domtoimage

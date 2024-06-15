@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import Loading from "../Lottie/Loading";
 
 export default function Company_view(props) {
   const [loading, setLoading] = useState(false);
@@ -9,6 +10,7 @@ export default function Company_view(props) {
   var [date, setDate] = useState();
   var [time, setTime] = useState();
   var [status, setStatus] = useState(false);
+  const [loading2, setLoading2] = useState(false);
 
   const iconstyle = {
     fontSize: "24px",
@@ -62,6 +64,7 @@ export default function Company_view(props) {
 
   function Approve() {
     setLoading(true);
+  
     console.log(props.email);
     axios
       .put("https://backend-testing-1rgv.onrender.com/approve", {
@@ -71,10 +74,12 @@ export default function Company_view(props) {
         alert("Company Approve Successfully");
         window.location.reload();
         setLoading(false);
+        setLoading2(false);
       })
       .catch((error) => {
         alert(error);
         setLoading(false);
+        setLoading2(false);
       });
   }
 
@@ -99,6 +104,7 @@ export default function Company_view(props) {
 
   function ApplyforVisitRequest(event) {
     event.preventDefault();
+    setLoading2(true);
     axios
       .post("https://backend-testing-1rgv.onrender.com/visit_request", {
         cemail: props.email,
@@ -109,12 +115,14 @@ export default function Company_view(props) {
       })
       .then((data) => {
         console.log(data);
+        setLoading2(false);
         if (data.data.data === "success") {
           setStatus(true);
           alert("Visit Request Successfully Send. Please wait for company response.");
         }
       })
       .catch((error) => {
+        setLoading2(false);
         console.log(error);
       });
   }
@@ -124,9 +132,15 @@ export default function Company_view(props) {
   const rightColumn = images.slice(mid);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const [selectedImage, setSelectedImage] = useState(null);
   const handleImageClick = () => {
     setIsModalOpen(true);
   };
+
+  const openModal = (image) => {
+    setSelectedImage(image);
+    setIsModalOpen(true);
+};
 
   const closeModal = () => {
     setIsModalOpen(false);
@@ -135,29 +149,29 @@ export default function Company_view(props) {
   return (
     <>
       <div className={`card ${isModalOpen ? 'blur-sm' : ''}`}>
-        <div className="flex justify-center">
+        <div className="flex justify-center " >
           {props.show !== "true" ? (
             <img
               src={props.img}
               className="w-72 max-w-full h-auto cursor-pointer"
               alt="..."
-              onClick={handleImageClick}
+              onClick={() => openModal(props.img)}
             />
           ) : null}
         </div>
         <div className="card-body">
-          <h5 className="card-title">
+          <h5 className="card-title sm:ml-5 md:ml-0 lg:ml-0 ml-0 p-4">
             <i className="fa fa-building-o" aria-hidden="true"></i> Company Name:-{props.name}
           </h5>
           <ul className="list-group list-group-flush">
-          <li className={`list-group-item ${props.address.length > 20 ? 'w-full' : 'w-auto'}`}>
-    <i className="fa fa-address-card mr-2" aria-hidden="true"></i> Address:-{props.address}
-</li>
+            <li className={`p-4 list-group-item ${props.address.length > 20 ? 'w-full' : 'w-auto'}`} >
+              <i className="fa fa-address-card mr-2" aria-hidden="true"></i> Address:-{props.address}
+            </li>
 
-            <li className="list-group-item">
+            <li className="list-group-item py-2 px-4">
               <i className="fa fa-mobile" aria-hidden="true" style={{ fontSize: "20px", width: "20px" }}></i> Mobile No.:-{props.mobile}
             </li>
-            <li className="list-group-item">
+            <li className="list-group-item py-2 px-4">
               <i className="fa fa-envelope" aria-hidden="true"></i> Email:-{props.email}
             </li>
             {props.status === "unverified" ? (
@@ -174,8 +188,8 @@ export default function Company_view(props) {
             ) : console.log()}
           </ul>
           {props.show === "true" ? (
-            <div className="mb-5">
-              <p className="lead fw-normal mb-1">About Company</p>
+            <div className="mb-5 ">
+              <p className="lead fw-normal mb-1 p-4">About Company</p>
               <div className="p-4" style={{ backgroundColor: "#f8f9fa" }}>
                 {data ? (
                   <>
@@ -195,19 +209,21 @@ export default function Company_view(props) {
                     <div className="row g-2">
                       <div className="col mb-2">
                         {leftColumn.map((image, index) => (
-                          <img key={index} src={image} alt={`Image ${index}`} className="w-100 rounded-3" style={{ height: "200px", margin: "10px" }} />
+                          <img key={index} src={image} alt={`Image ${index}`}   onClick={() => openModal(image)} className="w-full rounded-3xl object-cover cursor-pointer"
+                            style={{ height: "200px" }} />
                         ))}
                       </div>
                       <div className="col mb-2">
                         {rightColumn.map((image, index) => (
-                          <img key={index} src={image} alt={`Image ${index}`} className="w-100 rounded-3" style={{ height: "200px", margin: "10px" }} />
+                          <img key={index} src={image} alt={`Image ${index}`} onClick={() => openModal(image)} className="w-full rounded-3xl object-cover cursor-pointer"
+                            style={{ height: "200px" }} />
                         ))}
                       </div>
                     </div>
                     <form onSubmit={ApplyforVisitRequest}>
                       {status === true ? null : (
                         <>
-                          <li className="list-group-item" style={{ margin: "10px" }}>
+                          {/* <li className="list-group-item" style={{ margin: "10px" }}>
                             <div className="input-div2" style={{ marginLeft: "10px" }}>
                               <i className="fa fa-calendar" aria-hidden="true" style={iconstyle}></i>
                               <h5 style={{ marginTop: "10px" }}>Visit Date</h5>
@@ -215,8 +231,15 @@ export default function Company_view(props) {
                                 <input type="date" required="required" onChange={dateEnter} value={date} />
                               </div>
                             </div>
-                          </li>
-                          <li className="list-group-item" style={{ margin: "10px" }}>
+                          </li> */}
+                          <li className="list-group-item" style={{ margin: "10px" }}><div className="input-div2" >
+                            <i className="fa fa-calendar" aria-hidden="true" style={iconstyle}></i>
+                            <h5 style={{ marginTop: "5px" }}>Visit Date</h5>
+                            <div className="input-bx" style={emailfield}>
+                              <input type="date" required="required" onChange={dateEnter} value={date} />
+                            </div>
+                          </div></li>
+                          {/* <li className="list-group-item" style={{ margin: "10px" }}>
                             <div className="input-div2" style={{ marginLeft: "10px" }}>
                               <i className="fa fa-clock-o" aria-hidden="true" style={iconstyle}></i>
                               <h5 style={{ marginTop: "10px" }}>Visit Time</h5>
@@ -224,18 +247,34 @@ export default function Company_view(props) {
                                 <input type="time" required="required" onChange={timeEnter} value={time} />
                               </div>
                             </div>
-                          </li>
+                          </li> */}
+                          <li className="list-group-item" style={{ margin: "10px" }}><div className="input-div2" >
+                            <i className="fa fa-clock-o" aria-hidden="true" style={iconstyle}></i>
+                            <h5 style={{ marginTop: "5px" }}>Visit time</h5>
+                            <div className="input-bx" style={emailfield}>
+                              <input type="time" required="required" onChange={timeEnter} value={time} />
+                            </div>
+                          </div></li>
                         </>
                       )}
                       {props.show === "true" ? (
                         status === true ? (
-                          <button className="centered-button" type="submit" style={{ marginLeft: "260px", marginTop: "10px" }} disabled>
+                          <button className="centered-button" type="submit" style={{ marginTop: "10px" }} disabled>
                             Applied
                           </button>
                         ) : (
-                          <button className="centered-button" type="submit" style={{ marginLeft: "260px", marginTop: "10px" }}>
-                            Apply
-                          </button>
+                          <button 
+                          className="centered-button" 
+                          type="submit" 
+                          style={{ marginTop: "10px" }} 
+                          disabled={loading} // Disable the button while loading
+                        >
+                          {loading2 ? (
+                            <Loading/> // Replace with a spinner or loading indicator
+                          ) : (
+                            'Apply'
+                          )}
+                        </button>
                         )
                       ) : null}
                     </form>
@@ -250,7 +289,7 @@ export default function Company_view(props) {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75">
           <div className="relative">
             <img
-              src={props.img}
+              src={selectedImage}
               className="max-w-auto max-h-screen"
               alt="Zoomed Image"
             />
