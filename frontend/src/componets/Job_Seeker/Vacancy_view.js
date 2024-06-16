@@ -7,7 +7,7 @@ export default function Vacancy_view(props) {
     var [status, setStatus] = useState(false);
     var [vacancy, setVacancies] = useState(props.number_of_places);
     var [vacancy1, setVacancies1] = useState(props.number_of_places);
-
+    const [loading,setLoading]=useState(false);
     useEffect(() => {
         console.log(props.Experience)
         axios.post("https://backend-testing-1rgv.onrender.com/company_dashboard_data", {
@@ -72,6 +72,7 @@ export default function Vacancy_view(props) {
     }, []);
 
     function applyclick() {
+        setLoading(true);
         axios.post("https://backend-testing-1rgv.onrender.com/vacancy_request", {
             c_email: props.email,
             Job_description: props.description,
@@ -81,9 +82,11 @@ export default function Vacancy_view(props) {
             if (data.data.data == "success") {
                 alert("success");
                 setStatus(true);
+                setLoading(false);
             }
         }).catch((error) => {
             console.log(error);
+            setLoading(false);
         })
     }
     function vacancy_Update(event) {
@@ -132,7 +135,7 @@ export default function Vacancy_view(props) {
     return (<>
     
         {data ?
-            <section className="h-100 gradient-custom-2" style={{ marginLeft: props.mright, marginTop: "20px" }}>
+            <section className="h-100 gradient-custom-2 " style={{  marginTop: "20px" }}>
 
                 <div className="card">
                     <div className="rounded-top text-white d-flex flex-row" style={{ backgroundColor: "#007bff", height: "200px" }}>
@@ -170,7 +173,17 @@ export default function Vacancy_view(props) {
                                         {company ? <p className="font-italic mb-1"><i class="fa fa-phone" aria-hidden="true"></i>{company.Mobile_no}</p> : null}
 
                                         {company ? <p className="font-italic mb-1"><i class="fa fa-building" aria-hidden="true"></i>{company.Address}</p> : null}
-                                        <p className="font-italic mb-1"><i class="fa fa-clock-o" aria-hidden="true"></i>Opening Time:-{data.opening_time}<i class="fa fa-clock-o" aria-hidden="true" style={{ marginLeft: "40px" }}></i>Closing Time:-{data.closing_time}</p>
+                                        <div className="flex flex-col sm:flex-row">
+  <p className="font-italic mb-1 flex items-center">
+    <i className="fa fa-clock-o" aria-hidden="true"></i>
+    <span className="ml-2">Opening Time: {data.opening_time}</span>
+  </p><div className="w-5"></div>
+  <p className="flex items-center sm:ml-4 mt-2 sm:mt-0">
+    <i className="fa fa-clock-o" aria-hidden="true"></i>
+    <span className="ml-2">Closing Time: {data.closing_time}</span>
+  </p>
+</div>
+
                                         <div className="d-flex justify-content-between align-items-center mb-4">
 
                                             <p className="lead fw-normal mb-0" style={{ marginTop: "10px" }}>photos</p>
@@ -179,19 +192,21 @@ export default function Vacancy_view(props) {
                                         <div className="row g-2">
                                             <div class="col mb-2">
                                                 {leftColumn.map((image, index) => (
-                                                    <img key={index} src={image} alt={`Image ${index}`} className="w-100 rounded-3" style={{ height: "200px", margin: "10px" }} />
+                                                    <img key={index} src={image} alt={`Image ${index}`}  onClick={() => openModal(image)} className="w-full rounded-3xl object-cover cursor-pointer"
+                                                    style={{ height: "200px" }} />
                                                 ))}
                                             </div>
                                             <div className="col mb-2">
                                                 {rightColumn.map((image, index) => (
-                                                    <img key={index} src={image} alt={`Image ${index}`} className="w-100 rounded-3" style={{ height: "200px", margin: "10px" }} />
+                                                    <img key={index} src={image} alt={`Image ${index}`}  onClick={() => openModal(image)} className="w-full rounded-3xl object-cover cursor-pointer"
+                                                    style={{ height: "200px" }} />
                                                 ))}
                                             </div>
                                         </div>
                                     </> : null}
 
                                 </div>
-                                {props.show == "false" ? status == true ? <button className="centered-button" onClick={applyclick} style={{ textAlign: "center", marginTop: "10px" }} disabled>Applied</button> : <button className="centered-button" onClick={applyclick} style={{ textAlign: "center", marginTop: "10px" }} >Apply</button>
+                                {props.show == "false" ? status == true ? <button className="centered-button" onClick={applyclick} style={{ textAlign: "center", marginTop: "10px" }} disabled>Applied</button> : <button className="centered-button" onClick={applyclick} style={{ textAlign: "center", marginTop: "10px" }} >{loading?"Loading...":"Apply"}</button>
                                     : null}
 
                             </div> : <div className="flex flex-col lg:flex-row items-center">

@@ -160,19 +160,19 @@ export default function Company_view(props) {
           ) : null}
         </div>
         <div className="card-body">
-          <h5 className="card-title sm:ml-5 md:ml-0 lg:ml-0 ml-0 p-4">
+          <h5 className="card-title sm:ml-0 md:ml-0 lg:ml-0 ml-0 p-0">
             <i className="fa fa-building-o" aria-hidden="true"></i> Company Name:-{props.name}
           </h5>
           <ul className="list-group list-group-flush">
-            <li className={`p-4 list-group-item ${props.address.length > 20 ? 'w-full' : 'w-auto'}`} >
-              <i className="fa fa-address-card mr-2" aria-hidden="true"></i> Address:-{props.address}
+            <li className={`p-0 list-group-item ${props.address.length > 20 ? 'w-full' : 'w-auto'}`} >
+              <i className="fa fa-address-card mr-0" aria-hidden="true"></i> <b>Address : </b>{props.address}
             </li>
 
-            <li className="list-group-item py-2 px-4">
-              <i className="fa fa-mobile" aria-hidden="true" style={{ fontSize: "20px", width: "20px" }}></i> Mobile No.:-{props.mobile}
+            <li className="list-group-item p-0">
+              <i className="fa fa-mobile" aria-hidden="true" style={{ fontSize: "20px", width: "" }}></i><b> Mobile No. : </b>{props.mobile}
             </li>
-            <li className="list-group-item py-2 px-4">
-              <i className="fa fa-envelope" aria-hidden="true"></i> Email:-{props.email}
+            <li className="list-group-item p-0">
+              <i className="fa fa-envelope" aria-hidden="true"></i><b> Email : </b>{props.email}
             </li>
             {props.status === "unverified" ? (
               <li className="card text-center" style={{ alignItems: "center", margin: "20px", border: "none" }}>
@@ -197,12 +197,16 @@ export default function Company_view(props) {
                       <i className="fa fa-asterisk" aria-hidden="true"></i>
                       {data.description}
                     </p>
-                    <p className="font-italic mb-1">
-                      <i className="fa fa-clock-o" aria-hidden="true"></i>
-                      Opening Time:-{data.opening_time}
-                      <i className="fa fa-clock-o" aria-hidden="true" style={{ marginLeft: "40px" }}></i>
-                      Closing Time:-{data.closing_time}
-                    </p>
+                    <div className="flex flex-col sm:flex-row">
+  <p className="font-italic mb-1 flex items-center">
+    <i className="fa fa-clock-o" aria-hidden="true"></i>
+    <span className="ml-2">Opening Time: {data.opening_time}</span>
+  </p><div className="w-5"></div>
+  <p className="flex items-center sm:ml-4 mt-2 sm:mt-0">
+    <i className="fa fa-clock-o" aria-hidden="true"></i>
+    <span className="ml-2">Closing Time: {data.closing_time}</span>
+  </p>
+</div>
                     <div className="d-flex justify-content-between align-items-center mb-4">
                       <p className="lead fw-normal mb-0" style={{ marginTop: "10px" }}>Photos</p>
                     </div>

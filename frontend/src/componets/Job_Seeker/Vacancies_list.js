@@ -46,15 +46,10 @@ export default function Vacancies_list(props)
         return <Vacancy_Not_Found />;
       }
     return(
-    // <>{data.length>0?data.map((obj, index) => (
-    //     <div key={index}>
-    //       <Vacancy_view mright="270px"  show="false" qualification={props.user.qualification} Experience={props.user.Experience}  Field={props.user.Field} email={obj.Company_email} description={obj.job_decription} number_of_places={obj.number_of_places} package={obj.package} mobile={obj.Mobile_no}/>
-     
-    //     </div>)):<Vacancy_Not_Found/>}</>
-<>
+  <>
 {data.map((obj, index) => (
-        <div key={index}>
-          <Vacancy_view
+  <div key={index} className="w-full flex justify-end lg:w-9/12 lg:ml-auto lg:justify-end my-4">
+           <Vacancy_view
             mright="270px"
             show="false"
             qualification={props.user.qualification}

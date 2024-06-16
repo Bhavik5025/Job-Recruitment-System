@@ -30,7 +30,7 @@ export default function Visit_Request() {
     <div className="flex flex-col items-end gap-4 mt-4 w-full">
       {user.Data.map((company) => (
         <div key={company._id} className="w-full flex justify-end">
-          <div className="w-full sm:w-2/3 lg:w-2/3">
+          <div className="w-full sm:w-2/3 lg:w-10/12">
             <Company_view
               show="true"
               status="verified"

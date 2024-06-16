@@ -17,11 +17,11 @@ export default function CompanyResponse() {
   };
 
   return (
-    <div className="card center" style={{ width: "733px", marginLeft: "260px", marginTop: "40px" }}>
-      <div className="card-header">
-        <button
+    <div className="card-header mt-20 sm:mt-20 lg:mt-0 md:mt-0">
+    <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+     <button
           className="centered-button"
-          style={isInterview ? { backgroundColor: "white", color: "#007bff", border: "solid", width: "300px", marginLeft: "40px" } : { backgroundColor: "#007bff", width: "300px",marginLeft: "40px" }}
+          style={isInterview ? {backgroundColor:"white",color:"#007bff",border:"solid",width:"300px"}:{backgroundColor:"#007bff",width:"300px"}}
           onClick={handleNewClick}
         >
           Interview
@@ -29,7 +29,7 @@ export default function CompanyResponse() {
         <button
           className="centered-button"
           onClick={handleHistoryClick}
-          style={!isInterview ? { backgroundColor: "white", color: "#007bff", border: "solid", width: "300px" } : { backgroundColor: "#007bff", width: "300px" }}
+          style={!isInterview ? {backgroundColor:"white",color:"#007bff",border:"solid",width:"300px"}:{backgroundColor:"#007bff",width:"300px"}}
         >
           Visit Requests
         </button>
