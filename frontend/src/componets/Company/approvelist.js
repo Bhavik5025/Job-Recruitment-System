@@ -37,8 +37,11 @@ export default function ApproveList() {
         </button>
       </div>
       <div className="card-body">
-        {isInterview ? <InterviewList /> : null}
-        {!isInterview ? <Visit_list /> : null}
+      <div className="card-body lg:w-[600px] overflow-auto ">
+        {isInterview ? <InterviewList /> : <Visit_list />}
+      </div>
+
+  
       </div>
     </div>
     

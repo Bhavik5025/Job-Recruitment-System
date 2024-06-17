@@ -26,7 +26,7 @@ export default function InterviewList()
     return(<>  {j_data.length==0?<NotFound data="Currently, no approved job requests found"/>:null}
     {j_data
     ? j_data.map((obj, index) => (
-        <div key={index}><Jobber_details Approve={obj.Approve} sts="show" description={obj.Job_description} jemail={obj.Jobber_email} senddata={handler}></Jobber_details></div>
+        <div key={index} className="border m-2 h-auto"><Jobber_details Approve={obj.Approve} sts="show" description={obj.Job_description} jemail={obj.Jobber_email} senddata={handler}></Jobber_details></div>
       ))
     : null}</>)
 }

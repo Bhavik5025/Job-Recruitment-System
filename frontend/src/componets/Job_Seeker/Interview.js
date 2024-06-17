@@ -10,7 +10,7 @@ export default function Interview(props)
             .then((response) => {
                 setCompanyData(response.data.Data);
                 //console.log(response.data.Data);
-    
+              console.log("hell")
             })
             .catch((error) => {
                 console.error('Error fetching user data:', error);
@@ -22,7 +22,7 @@ export default function Interview(props)
   
     {props.status !== "true" ? (
   <div>
-    <label style={{ fontFamily: "Poppins", marginTop: "10px", fontSize: "20px" }}>
+    <label style={{ fontFamily: "Poppins", marginTop: "10px", fontSize: "20px",marginLeft:"5px" }}>
       <i className="fa fa-asterisk" aria-hidden="true"></i> Job Description:
     </label>
     <label style={{ fontFamily: "Poppins", marginTop: "10px", fontSize: "20px", }}>
@@ -34,8 +34,8 @@ export default function Interview(props)
 <div className="flex flex-col">
 <label style={{fontFamily:"Poppins",marginTop:"10px",fontSize:"20px",marginLeft:"5px"}}><i class="fa fa-building" aria-hidden="true"></i>Company Name: {company?company.Company_name:null}</label>
     
-    <label style={{fontFamily:"Poppins",marginTop:"10px",marginLeft:"5px",fontSize:"20px"}}><i class="fa fa-envelope" aria-hidden="true"></i>Company Email: {props.cemail}</label>
-    <label style={{fontFamily:"Poppins",marginTop:"10px",marginLeft:"5px",fontSize:"20px"}}><i class="fa fa-phone" aria-hidden="true"></i>Company Mobile: {company?company.Mobile_no:null}</label><br/>
+    <label style={{fontFamily:"Poppins",marginTop:"10px",marginLeft:"5px",fontSize:"20px"}}><i class="fa fa-envelope" aria-hidden="true"></i> {props.cemail}</label>
+    <label style={{fontFamily:"Poppins",marginTop:"10px",marginLeft:"5px",fontSize:"20px"}}><i class="fa fa-phone" aria-hidden="true"></i> {company?company.Mobile_no:null}</label><br/>
   
 </div>
   {props.status!="true"?(<div className="mb-5 ml-5" style={{marginTop:"10px"}}>

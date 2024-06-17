@@ -39,15 +39,15 @@ export default function Jobber_Request() {
     return (<>
 <div className=" mx-auto mt-8">
       <div className="flex justify-center">
-        <div className="w-full max-w-4xl">
-        <label className="parent_label text-2xl font-bold mb-4 ml-20 lg:ml-0 md:ml-0" style={{ fontFamily: "Poppins" }}>
+        <div className="w-10/12 max-w-4xl">
+        <label className="parent_label text-2xl font-bold mb-4 mt-10 lg:mt-0 md:mt-0 ml-20 lg:ml-0 md:ml-0" style={{ fontFamily: "Poppins" }}>
             Job Requests
           </label>
           {j_data.length === 0 ? (
             <NotFound data="No job request found at the moment" />
           ) : (
             j_data.map((obj, index) => (
-              <div key={index} className="mb-4">
+              <div key={index} className="mb-4 shadow-lg">
                 <Jobber_details
                   Approve={obj.Approve}
                   description={obj.Job_description}

@@ -91,9 +91,9 @@ export default function Login_Form() {
                             <span className="span-text">Password</span>
                         </div>
                     </div>
-                    <div className="flex justify-center">
-                        <button type="submit" className="centered-button ml-10 mt-4" style={{ fontFamily: "Poppins" }} disabled={loading}>
-                            {loading ? "Loading..." : "Log In"}
+                    <div className="flex justify-center mt-0 ml-10">
+                        <button type="submit" className="centered-button " style={{ fontFamily: "Poppins" }} disabled={loading}>
+                            {loading ? "Loading..." : "Login"}
                         </button>
                     </div>
                 </form>

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Interview from "./Interview";
+import NotFound from "../Company/NotFound";
 
 export default function VisitCompanyResponse() {
   var [rdata, setRdata] = useState([]);
@@ -17,8 +18,8 @@ export default function VisitCompanyResponse() {
   }, []);
 
   return (
-    <>{rdata?rdata.map((obj, index) => (
+    <>{rdata.length!=0?rdata.map((obj, index) => (
         <div key={index}><Interview status="true" cemail={obj.Company_email}  Date={obj.Date} time={obj.Time}/></div>
-      )):null}</>
+      )):<NotFound data="No Company Response Found.."/>}</>
   );
 }

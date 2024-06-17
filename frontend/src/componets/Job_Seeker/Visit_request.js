@@ -20,7 +20,7 @@ export default function Visit_Request() {
   return (<>       
  <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex flex-col">
   <div className="mt-10 sm:mt-23 w-full sm:w-2/3 mx-auto">
-    <h1 className="parent_label text-2xl font-bold mb-0 ml-20 lg:ml-0 md:ml-0" style={{ fontFamily: "Poppins" }}>Company List</h1>
+    <h1 className="parent_label text-2xl font-bold mb-4 ml-20 lg:ml-0 md:ml-0" style={{ fontFamily: "Poppins" }}>Company List</h1>
   </div>
   {loading ? (
     <div className="flex justify-center items-center">

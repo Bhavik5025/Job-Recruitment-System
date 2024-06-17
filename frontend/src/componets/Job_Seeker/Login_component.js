@@ -85,7 +85,7 @@ export default function Job_Seeker_Login_Componenet()
                 <span className="span-text">Password</span>
             </div>
         </div>
-        <div className="d-flex justify-content-center">
+        <div className="flex justify-center mt-0 ml-10">
             <button type="submit" disabled={loading} className="centered-button ml-10" style={{ marginTop: "20px", fontFamily: "Poppins" }}>{loading ? 'Loading...' : 'Login'}</button>
             </div>
 

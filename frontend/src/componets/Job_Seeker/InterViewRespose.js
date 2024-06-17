@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Interview from "./Interview";
+import NotFound from "../Company/NotFound";
 export default function InterviewResponse()
 {
     var [rdata,setRdata]=useState([]);
@@ -10,12 +11,13 @@ export default function InterviewResponse()
             Approve:"true"
         }).then((data)=>{
             console.log(data.data.data)
+            
               setRdata(data.data.data);  
         }
 
         )
     },[])
-    return(<>{rdata?rdata.map((obj, index) => (
+    return(<>{rdata.length!=0?rdata.map((obj, index) => (
         <div key={index}><Interview description={obj.Job_description} cemail={obj.Company_email} address={obj.Address} Date={obj.Date} time={obj.Time}/></div>
-      )):null}</>)
+      )):<NotFound data="Currently, there is no interview response available."></NotFound>}</>)
 }

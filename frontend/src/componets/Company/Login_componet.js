@@ -57,11 +57,11 @@ export default function Login_Component() {
     }
     return (<><div  className="d-flex flex-col items-center justify-center mx-auto">
 
-        <label className="parent_label ml-10">Sign in</label>
+        <label className="parent_label ml-10 ">Sign in</label>
         <form onSubmit={btnclick}>
             <div className="input-div w-full">
                 <i className="fa fa-envelope" style={iconstyle} ></i>
-                <div className="input-bx ml-5" >
+                <div className="input-bx ml-4" >
                     <input type="email" required="required" onChange={emailenter} value={email} />
                     <span className="span-text">Email Id</span>
                 </div>
@@ -74,8 +74,8 @@ export default function Login_Component() {
                     <span className="span-text">Password</span>
                 </div>
             </div>
-            <div className="d-flex justify-content-center">
-            <button type="submit" disabled={loading} className="centered-button ml-10" style={{ marginTop: "20px", fontFamily: "Poppins" }}>{loading ? 'Loading...' : 'Login'}</button>
+            <div className="flex justify-center mt-0 ml-10">
+            <button type="submit" disabled={loading} className="centered-button" style={{ marginTop: "15px", fontFamily: "Poppins" }}>{loading ? 'Loading...' : 'Login'}</button>
             </div>
 
         </form>
