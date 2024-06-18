@@ -38,7 +38,26 @@
   </head>
   <body>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-   
+    <script src="https://cdn.botpress.cloud/webchat/v1/inject.js"></script>
+    <script>
+      window.botpressWebChat.init({
+          "composerPlaceholder": "Chat with Job Recruitment System",
+          "botConversationDescription": "This chatbot was built surprisingly fast with Botpress",
+          "botId": "f2ff07b4-78ac-4f56-a4f2-ca320b1df2cc",
+          "hostUrl": "https://cdn.botpress.cloud/webchat/v1",
+          "messagingUrl": "https://messaging.botpress.cloud",
+          "clientId": "f2ff07b4-78ac-4f56-a4f2-ca320b1df2cc",
+          "webhookId": "a194cc0b-579d-4571-9cba-8fb1198333ef",
+          "lazySocket": true,
+          "themeName": "prism",
+          "botName": "Job Recruitment System",
+          "frontendVersion": "v1",
+          "showPoweredBy": true,
+          "theme": "prism",
+          "themeColor": "#2563eb",
+          "allowedOrigins": []
+      });
+    </script>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
     <!--
