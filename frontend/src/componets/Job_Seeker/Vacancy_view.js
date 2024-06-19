@@ -154,13 +154,15 @@ export default function Vacancy_view(props) {
                     <div className="card-body p-4 text-black">
                         <div className="mb-5">
                             <p className="lead fw-normal mb-1 ml-0">Description</p>
-                            <div className="p-4" style={{ backgroundColor: "#f8f9fa" }}>
-                                <p className="font-italic mb-1">{props.description}</p>
-                                <p className="font-italic mb-1"><i class="fa fa-asterisk" aria-hidden="true"></i><b>Field:-{props.Field}</b></p>
-                                <p className="font-italic mb-1"><i class="fa fa-asterisk" aria-hidden="true"></i><b>Number Of Vacancies:-{vacancy1}</b></p>
-                                <p className="font-italic mb-1"><i class="fa fa-asterisk" aria-hidden="true"></i><b>Package:-{props.package} <i class="fa fa-inr" aria-hidden="true"></i> </b></p>
+                            <div className="p-4 mx-auto w-full lg:max-w-2xl" style={{ backgroundColor: "#f8f9fa" }}>
+    <p className="font-italic mb-1">{props.description}</p>
 
-                            </div>
+    <p className="font-italic mb-1"><i className="fa fa-asterisk" aria-hidden="true"></i><b>Field:-{props.Field}</b></p>
+    <p className="font-italic mb-1"><i className="fa fa-asterisk" aria-hidden="true"></i><b>Number Of Vacancies:-{vacancy1}</b></p>
+    <p className="font-italic mb-1"><i className="fa fa-asterisk" aria-hidden="true"></i><b>Package:-{props.package} <i className="fa fa-inr" aria-hidden="true"></i></b></p>
+</div>
+
+
                         </div>
                         {props.show == "false" ?
                             <div className="mb-5">

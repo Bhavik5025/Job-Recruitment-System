@@ -57,7 +57,7 @@ return (
      
       {isDataValid ? (
         user.Data.map((company) => (
-          <div key={company._id} style={{}}>  <Vacancy_view mright=""  show="true" email={company.Company_email} Field={company.Field} description={company.job_decription} Experience={company.Experience} qualification={company.qualification} number_of_places={company.number_of_places} package={company.package} mobile={company.Mobile_no}/></div>
+          <div key={company._id} className="">  <Vacancy_view mright=""  show="true" email={company.Company_email} Field={company.Field} description={company.job_decription} Experience={company.Experience} qualification={company.qualification} number_of_places={company.number_of_places} package={company.package} mobile={company.Mobile_no}/></div>
         ))
       ) : (
         <NotFound data="No Vacancy Found"/>
