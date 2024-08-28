@@ -12,7 +12,7 @@ export default function CompanyResponse() {
   };
 
   const handleNewClick = () => {
-    console.log("jja")
+  
     setIsInterview(true);
   };
 
