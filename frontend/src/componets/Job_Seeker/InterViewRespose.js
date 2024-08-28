@@ -18,6 +18,6 @@ export default function InterviewResponse()
         )
     },[])
     return(<>{rdata.length!=0?rdata.map((obj, index) => (
-        <div key={index}><Interview description={obj.Job_description} cemail={obj.Company_email} address={obj.Address} Date={obj.Date} time={obj.Time}/></div>
+        <div key={index} className="flex justify-center lg:justify-end"><Interview description={obj.Job_description} cemail={obj.Company_email} address={obj.Address} Date={obj.Date} time={obj.Time}/></div>
       )):<NotFound data="Currently, there is no interview response available."></NotFound>}</>)
 }

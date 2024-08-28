@@ -34,7 +34,7 @@ export default function CompanyResponse() {
           Visit Requests
         </button>
       </div>
-      <div className="card-body">
+      <div className="card-body   ">
         {isInterview ? <InterviewResponse /> : null}
         {!isInterview ? <VisitResponse /> : null}
       </div>

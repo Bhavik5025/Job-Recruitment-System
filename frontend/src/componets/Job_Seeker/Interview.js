@@ -16,7 +16,7 @@ export default function Interview(props)
                 console.error('Error fetching user data:', error);
             });
     },[])
-    return(<><div style={{border:"1px solid #000000",borderRadius:"10px",marginTop:"10px",boxShadow: "5px 10px 18px #c9c5c5",}}>
+    return(<><div className="w-2/3" style={{border:"1px solid #000000",borderRadius:"10px",marginTop:"10px",boxShadow: "5px 10px 18px #c9c5c5",}}>
        
     <div >
   
